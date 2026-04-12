@@ -1,40 +1,118 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
-<title>Energy Exam</title>
+<title>Energy Exam Portal</title>
+
 <style>
 body {
-    font-family: Arial;
+    margin: 0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
     text-align: center;
-    padding-top: 100px;
-    background: #f4f6f8;
 }
-h1 {
-    margin-bottom: 40px;
+
+/* HEADER */
+.header {
+    padding: 60px 20px 20px;
 }
-a {
-    display: block;
-    width: 250px;
-    margin: 20px auto;
-    padding: 15px;
-    background: green;
+
+.header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #ddd;
+    font-size: 18px;
+}
+
+/* CARD CONTAINER */
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    gap: 30px;
+}
+
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    width: 280px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #00c853;
     color: white;
     text-decoration: none;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 16px;
 }
-a:hover {
-    background: darkgreen;
+
+.btn:hover {
+    background: #00a844;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 60px;
+    padding: 20px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .header h1 {
+        font-size: 30px;
+    }
 }
 </style>
+
 </head>
 
 <body>
 
-<h1>Energy Exam Portal</h1>
+<div class="header">
+    <h1>⚡ Energy Exam Portal</h1>
+    <p>Practice MCQs from Weeks 1–8 | NPTEL Style</p>
+</div>
 
-<a href="part1.html">Week 1–4 Test</a>
-<a href="part2.html">Week 5–8 Test</a>
+<div class="container">
+
+    <div class="card">
+        <h2>Week 1–4</h2>
+        <p>Energy basics, fossil fuels, economics & finance</p>
+        <a href="part1.html" class="btn">Start Test</a>
+    </div>
+
+    <div class="card">
+        <h2>Week 5–8</h2>
+        <p>Environment, sustainability, LCA & impact analysis</p>
+        <a href="part2.html" class="btn">Start Test</a>
+    </div>
+
+</div>
+
+<div class="footer">
+    Built for practice • Works on mobile 📱
+</div>
 
 </body>
 </html>
+```
