@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MCQ Exam (Week 1–4)</title>
+<style>
+body { font-family: Arial; background:#f4f6f8; padding:20px;}
+h1 { text-align:center;}
+.question { background:white; padding:15px; margin-bottom:15px; border-radius:10px;}
+.correct { color:green; font-weight:bold;}
+.wrong { color:red; font-weight:bold;}
+button { padding:12px 25px; font-size:16px; background:green; color:white; border:none; border-radius:6px;}
+</style>
+</head>
+
+<body>
+
+<h1>MCQ Exam (Week 1–4)</h1>
+<form id="quizForm"></form>
+<button onclick="submitQuiz()">Submit</button>
+<h2 id="score"></h2>
+
+<script>
+
+function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
+
+const quizData = [
+
+/* WEEK 1 */
+{
+q:"What is the primary disadvantage of solar and wind energy compared to fossil fuels?",
+o:["They are always more expensive","Intermittency (they are not available 24/7)","They require water for cooling","They produce radioactive waste"],
+a:"Intermittency (they are not available 24/7)"
+},
+{
+q:"What is the main characteristic that defines a \"renewable\" energy resource?",
+o:["It requires no infrastructure investment for deployment","It is replenished naturally on a human timescale","It is more cost-effective than fossil fuel alternatives","It has higher energy density than conventional fossil fuels"],
+a:"It is replenished naturally on a human timescale"
+},
+{
+q:"What is the observed trend regarding energy consumption in OECD (developed) countries in recent years?",
+o:["Rapid exponential growth","Stagnant or slightly declining due to efficiency and population stability","Sharp decline due to lack of resources","Fluctuating wildly"],
+a:"Stagnant or slightly declining due to efficiency and population stability"
+},
+{
+q:"Which country has the highest per capita energy consumption?",
+o:["Qatar","United States","China","India"],
+a:"Qatar"
+},
+{
+q:"Which country has the highest total energy consumption?",
+o:["India","China","United States","Brazil"],
+a:"China"
+},
+{
+q:"What is \"Energy Poverty\"?",
+o:["Lack of access to modern energy services like electricity and clean cooking facilities","When a country runs out of coal","When energy prices are too low","The use of too much renewable energy"],
+a:"Lack of access to modern energy services like electricity and clean cooking facilities"
+},
+{
+q:"In the context of energy consumption, what major factor drives the increase in energy use in developing nations like India?",
+o:["Decrease in manufacturing","Rise in standard of living and population growth","Saturation of infrastructure","Adoption of electric vehicles only"],
+a:"Rise in standard of living and population growth"
+},
+{
+q:"Which sector typically consumes the largest share of global delivered energy?",
+o:["Residential","Agriculture","Industrial","IT sector"],
+a:"Industrial"
+},
+
+/* WEEK 2 */
+{
+q:"What is \"Primary Energy\"?",
+o:["Energy that has been converted into electricity","Energy available directly in the raw form (e.g., coal, crude oil, solar) before conversion","Energy used specifically for residential lighting","The energy remaining after transmission losses"],
+a:"Energy available directly in the raw form (e.g., coal, crude oil, solar) before conversion"
+},
+{
+q:"A country's total final energy consumption is 5000 PJ. If the industrial sector uses 40% of this, how much energy does industry consume?",
+o:["1000 PJ","1500 PJ","2000 PJ","2500 PJ"],
+a:"2000 PJ"
+},
+{
+q:"A country has coal reserves of 40,000 million tonnes. Its current annual coal production is 500 million tonnes per year. What is the static R/P ratio?",
+o:["10 Years","20 Years","40 Years","80 Years"],
+a:"80 Years"
+},
+{
+q:"Which of the following is not a primary fossil fuel resource?",
+o:["Coal","Crude oil","Natural gas","Electricity"],
+a:"Electricity"
+},
+{
+q:"What is the main reason for the significant difference between \"Primary Energy\" supply and \"Final Energy\" consumption?",
+o:["Theft of electricity","Conversion losses (thermodynamics) and transmission losses","Statistical errors","Storage of energy in batteries"],
+a:"Conversion losses (thermodynamics) and transmission losses"
+},
+{
+q:"Which unit is commonly used to compare the energy content of different fossil fuels on a large scale?",
+o:["Volt","Ampere","Tonne of Oil Equivalent (toe)","Pascal"],
+a:"Tonne of Oil Equivalent (toe)"
+},
+{
+q:"The term \"proved reserves\" refers to:",
+o:["Estimated resources that may exist","Technically recoverable resources with current technology","Resources guaranteed by government","All fossil fuels discovered in the past century"],
+a:"Technically recoverable resources with current technology"
+},
+{
+q:"Which major fossil fuel is primarily composed of Methane (CH4)?",
+o:["Coal","Natural Gas","Gasoline","Diesel"],
+a:"Natural Gas"
+},
+
+/* WEEK 3 */
+{
+q:"What is the fundamental principle of the \"Time Value of Money\"?",
+o:["Money has the same value always","Money today is worth more than the same money in the future","Time does not change the value of money","Interest rates do not affect the value of money"],
+a:"Money today is worth more than the same money in the future"
+},
+{
+q:"What typically happens to the NPV of a project if you increase the Discount Rate used in the calculation?",
+o:["The NPV increases","The NPV decreases","The NPV stays exactly the same","The NPV becomes infinite"],
+a:"The NPV decreases"
+},
+{
+q:"If the NPV of a project is positive, what does it indicate?",
+o:["The project is expected to be profitable and should typically be accepted","The project will lose money","The project has zero risk","The project should be abandoned immediately"],
+a:"The project is expected to be profitable and should typically be accepted"
+},
+{
+q:"What does the Internal Rate of Return (IRR) represent?",
+o:["The annual profit generated by the project in dollars","The discount rate that makes the Net Present Value (NPV) of a project equal to zero","The depreciation rate of the solar panels","The tax rate applied to the project"],
+a:"The discount rate that makes the Net Present Value (NPV) of a project equal to zero"
+},
+{
+q:"Why do governments often offer \"Tax Credits\" for renewable energy projects?",
+o:["To increase the cost of electricity for consumers","To encourage investment by improving the project's financial return","To reduce the efficiency of the technology","To increase the taxes paid by the company"],
+a:"To encourage investment by improving the project's financial return"
+},
+{
+q:"Which of the following is considered a Capital Expenditure (CAPEX)?",
+o:["Monthly salary of plant operators","Annual insurance premiums","Purchase cost of machinery, equipment, and installation","Routine lubricating oil for gears"],
+a:"Purchase cost of machinery, equipment, and installation"
+},
+{
+q:"A project needs an initial investment of ₹50,000 and returns ₹10,000 per year. What is the Simple Payback Period?",
+o:["2 Years","3 Years","5 Years","10 Years"],
+a:"5 Years"
+},
+{
+q:"If the discount rate is 10%, what is the present value of ₹1,000 received after 1 year?",
+o:["₹1,100","₹909.09","₹1,000","₹850"],
+a:"₹909.09"
+},
+
+/* WEEK 4 */
+{
+q:"In project financing, what is the key difference between \"Debt\" and \"Equity\"?",
+o:["Debt represents ownership in the company, while Equity is a loan.","Debt must be repaid with interest, while Equity represents ownership and claims on residual profits.","Debt provides voting rights in the company, while Equity does not.","Equity has a fixed repayment schedule, while Debt returns vary with company performance."],
+a:"Debt must be repaid with interest, while Equity represents ownership and claims on residual profits."
+},
+{
+q:"What is \"Externality\" in environmental economics?",
+o:["A cost or benefit caused by a producer that is not financially incurred or received by that producer.","The external value of a power plant.","The cost of importing fuel from an external country.","The total profit made by a company."],
+a:"A cost or benefit caused by a producer that is not financially incurred or received by that producer."
+},
+{
+q:"What does ESG stand for in the context of corporate reporting?",
+o:["Energy, Science, Growth","Environmental, Social, and Governance","Economics, Strategy, Goals","Electricity, Solar, Gas"],
+a:"Environmental, Social, and Governance"
+},
+{
+q:"An investor is comparing three mutually exclusive energy projects proposed by three different companies... Which company should the investor choose?",
+o:["Company X, because positive NPV is sufficient.","Company Y, because it has the lowest value.","Company Z, because it has the highest positive NPV.","Any company, as long as the project is renewable."],
+a:"Company Z, because it has the highest positive NPV."
+},
+{
+q:"A government imposes a Carbon Tax of $30 per tonne of CO2. If a power plant emits 10,000 tonnes of CO2 in a year, how much tax must they pay?",
+o:["$3,000","$30,000","$300,000","$3,000,000"],
+a:"$300,000"
+},
+{
+q:"Which business strategy reduces both cost and environmental impact?",
+o:["Ignoring regulations","Energy efficiency improvements","Using only diesel generators","Increasing emissions"],
+a:"Energy efficiency improvements"
+},
+{
+q:"In a Project Financing structure, a company uses a Debt-to-Equity ratio of 70:30. If the total project cost is $100,000, how much \"Equity\" must the company invest?",
+o:["$30,000","$70,000","$100,000","$50,000"],
+a:"$30,000"
+},
+{
+q:"You are evaluating two energy efficiency upgrades... what is the correct decision?",
+o:["Accept Project X only.","Accept Project Y only.","Accept both projects.","Reject both projects."],
+a:"Accept Project Y only."
+}
+
+];
+
+const questions = shuffle([...quizData]);
+const form = document.getElementById("quizForm");
+
+questions.forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+
+let opts=shuffle([...q.o]);
+
+div.innerHTML=`<p>${i+1}) ${q.q}</p>`;
+opts.forEach(o=>{
+div.innerHTML+=`<label><input type="radio" name="q${i}" value="${o}">${o}</label><br>`;
+});
+div.innerHTML+=`<p id="r${i}"></p>`;
+
+form.appendChild(div);
+});
+
+function submitQuiz(){
+let score=0;
+
+questions.forEach((q,i)=>{
+let sel=document.querySelector(`input[name=q${i}]:checked`);
+let res=document.getElementById(`r${i}`);
+
+if(sel){
+if(sel.value===q.a){
+score++;
+res.innerHTML="✅ Correct";
+res.className="correct";
+}else{
+res.innerHTML="❌ Wrong | Correct: "+q.a;
+res.className="wrong";
+}
+}else{
+res.innerHTML="❌ Not Answered | Correct: "+q.a;
+res.className="wrong";
+}
+});
+
+document.getElementById("score").innerText=
+`Final Score: ${score} / ${questions.length}`;
+}
+
+</script>
+</body>
+</html>
