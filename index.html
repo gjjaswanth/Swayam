@@ -51,10 +51,7 @@ body {
     cursor: pointer;
 }
 
-/* MAIN CONTENT (hidden initially) */
-#main {
-    display: none;
-}
+
 
 
 
@@ -103,13 +100,7 @@ body {
 
 <body>
 
-<!-- 🔐 LOGIN SCREEN -->
-<div id="login">
-    <h2>🔒 Enter Password</h2>
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="checkPassword()">Enter</button>
-    <p id="error" style="color:red;"></p>
-</div>
+
 
 <!-- 🔓 MAIN CONTENT -->
 <div id="main">
@@ -135,18 +126,6 @@ body {
 
 </div>
 
-<script>
-function checkPassword() {
-    var pass = document.getElementById("password").value;
-
-    if(pass === "0210") {   // 🔑 CHANGE PASSWORD HERE
-        document.getElementById("login").style.display = "none";
-        document.getElementById("main").style.display = "block";
-    } else {
-        document.getElementById("error").innerText = "Wrong Password!";
-    }
-}
-</script>
 
 </body>
 </html>
