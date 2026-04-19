@@ -26,108 +26,252 @@ function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
 const quizData = [
 
 /* WEEK 5 */
-{q:"What is the primary cause of acid rain?",
-o:["Carbon dioxide emissions","Sulfur and nitrogen oxide emissions","Methane emissions","Ozone depletion"],
-a:"Sulfur and nitrogen oxide emissions"},
-{q:"How is sulfur content typically reduced in crude oil?",
-o:["Desalination","Adding lead compounds","Carbon capture","Desulfurization"],
-a:"Desulfurization"},
-{q:"Common method to reduce SO2 emissions?",
-o:["Add sulfur","Carbon capture","Install scrubbers","Lead additives"],
-a:"Install scrubbers"},
-{q:"How was engine knocking avoided?",
-o:["Reducing efficiency","Adding lead compounds","Increasing air intake","Using ethanol"],
-a:"Adding lead compounds"},
-{q:"True statement about lead pigment pollution?",
-o:["No risk","Natural weathering source","Promote lead paints","Risks mitigated via abatement"],
-a:"Risks mitigated via abatement"},
-{q:"Impact of Chernobyl disaster?",
-o:["Increased biodiversity","Better agriculture","Radioactive contamination","Habitat preservation"],
-a:"Radioactive contamination"},
-{q:"Reason for phase-out of leaded petrol?",
-o:["Cost","Performance","Environmental and health concerns","Lead availability"],
-a:"Environmental and health concerns"},
-{q:"Gas pollutant in lower atmosphere but useful in stratosphere?",
-o:["N2O","Ozone","CO2","CH4"],
-a:"Ozone"},
+{
+q:"What is the primary cause of acid rain?",
+o:["Carbon dioxide emissions","Sulfur and nitrogen oxide emissions","Methane emissions","Ozone layer depletion"],
+a:"Sulfur and nitrogen oxide emissions"
+},
+{
+q:"How is sulfur content typically reduced in crude oil?",
+o:["Desalination","Adding lead-based compounds","Carbon capture","Desulfurization"],
+a:"Desulfurization"
+},
+{
+q:"What is a common method for reducing SO2 emissions in industrial processes?",
+o:["Introducing more sulfur into the combustion process","Implementing carbon capture and storage","Installing scrubbers or flue gas desulfurization systems","Using leaded additives in fuel"],
+a:"Installing scrubbers or flue gas desulfurization systems"
+},
+{
+q:"How was engine knocking avoided in internal combustion engines?",
+o:["Reducing fuel efficiency","Adding lead-based compounds such as (Pb(C2H5)4)","Increasing air intake","Using pure ethanol as fuel"],
+a:"Adding lead-based compounds such as (Pb(C2H5)4)"
+},
+{
+q:"Which of the following statements is true regarding lead-based pigment pollution and its abatement?",
+o:[
+"Lead-based pigments are environmentally benign and pose no risk to human health",
+"The main source of lead-based pigment pollution is natural weathering of rocks",
+"Abatement measures for lead-based pigment pollution include promoting the use of lead-based paints in construction",
+"The health risks associated with lead-based pigment pollution can be mitigated through proper abatement strategies"
+],
+a:"The health risks associated with lead-based pigment pollution can be mitigated through proper abatement strategies"
+},
+{
+q:"What is a significant environmental impact associated with the Chernobyl Disaster (Nuclear Accident)?",
+o:[
+"Increased biodiversity in the affected region",
+"Enhanced agricultural productivity near the disaster site",
+"Long-term radioactive contamination and adverse effects on ecosystems",
+"Preservation of natural habitats due to human evacuation"
+],
+a:"Long-term radioactive contamination and adverse effects on ecosystems"
+},
+{
+q:"What was the major reason for the global phase-out of leaded petrol?",
+o:["Cost-effectiveness","Enhanced engine performance","Environmental and health concerns","Increased availability of lead reserves"],
+a:"Environmental and health concerns"
+},
+{
+q:"Which gas is considered a pollutant in the lower atmosphere but plays a crucial role in the stratosphere?",
+o:["Nitrous oxide (N2O)","Ozone (O3)","Carbon dioxide (CO2)","Methane (CH4)"],
+a:"Ozone (O3)"
+},
 
 /* WEEK 6 */
-{q:"Most common greenhouse gas?",
-o:["N2O","CH4","CO2","SF6"],
-a:"CO2"},
-{q:"Term for CO2, CH4, N2O group?",
-o:["GHGs","ODS","Air pollutants","Aerosols"],
-a:"GHGs"},
-{q:"Mitigation actions include?",
-o:["Deforestation","Fossil fuel increase","Reduce GHG + sequestration","Ignore renewables"],
-a:"Reduce GHG + sequestration"},
-{q:"Weather vs climate?",
-o:["Weather long-term","Climate short-term","Same","Weather short-term, climate long-term"],
-a:"Weather short-term, climate long-term"},
-{q:"CCS involves?",
-o:["Increase emissions","Fuel increase","Capture & store CO2","Release CO2"],
-a:"Capture & store CO2"},
-{q:"Kyoto Protocol?",
-o:["Deforestation","GHG treaty","Fossil increase","Nuclear plan"],
-a:"GHG treaty"},
-{q:"Impact of nuclear waste?",
-o:["Soil fertility","Biodiversity","Radioactive contamination","Less pollution"],
-a:"Radioactive contamination"},
-{q:"Excess nutrients in water?",
+{
+q:"What is the most common gas responsible for the greenhouse effect on earth?",
+o:["Nitrous oxide (N2O)","Methane (CH4)","Carbon dioxide (CO2)","Sulfur hexafluoride (SF6)"],
+a:"Carbon dioxide (CO2)"
+},
+{
+q:"What is the collective term for gases such as CO2, methane, and nitrous oxide that contribute to the greenhouse effect?",
+o:["Greenhouse gases (GHGs)","Ozone-depleting substances (ODS)","Air pollutants","Aerosols"],
+a:"Greenhouse gases (GHGs)"
+},
+{
+q:"What characterizes mitigating actions on climate change?",
+o:[
+"Accelerating deforestation to reduce carbon emissions",
+"Increasing reliance on fossil fuels for energy production",
+"Implementing strategies to reduce greenhouse gas emissions and enhance carbon sequestration",
+"Ignoring renewable energy sources in favor of conventional methods"
+],
+a:"Implementing strategies to reduce greenhouse gas emissions and enhance carbon sequestration"
+},
+{
+q:"How is weather different from climate?",
+o:[
+"Weather refers to day-to-day atmospheric conditions, while climate is the long-term average",
+"Climate refers to day-to-day atmospheric conditions, while weather is the long-term average",
+"Weather and climate are interchangeable terms",
+"Weather and climate both describe short-term atmospheric conditions"
+],
+a:"Weather refers to day-to-day atmospheric conditions, while climate is the long-term average"
+},
+{
+q:"What does the process of Capture and Sequestration of CO2 (CCS) involve?",
+o:[
+"Increasing CO2 emissions from industrial processes",
+"Increasing CO2 emissions by elevating fuel consumption",
+"Capturing CO2 emissions from sources like power plants and storing them underground",
+"Releasing stored CO2 into the atmosphere for agricultural purposes"
+],
+a:"Capturing CO2 emissions from sources like power plants and storing them underground"
+},
+{
+q:"What is the Kyoto Protocol?",
+o:[
+"An international agreement to promote deforestation",
+"A treaty to regulate greenhouse gas emissions and combat climate change",
+"A global initiative to increase dependence on fossil fuels",
+"A framework for the development of nuclear energy"
+],
+a:"A treaty to regulate greenhouse gas emissions and combat climate change"
+},
+{
+q:"What is a potential environmental impact of nuclear waste in the long term?",
+o:["Enhanced soil fertility","Increased biodiversity","Radioactive contamination","Reduced air pollution"],
+a:"Radioactive contamination"
+},
+{
+q:"What is the term for the excessive nutrient enrichment of water bodies, often leading to algal blooms?",
 o:["Acidification","Desalination","Eutrophication","Filtration"],
-a:"Eutrophication"},
+a:"Eutrophication"
+},
 
 /* WEEK 7 */
-{q:"Oil spills impact?",
-o:["Increase biodiversity","Provide nutrients","Purify water","Harm marine life"],
-a:"Harm marine life"},
-{q:"Biomass food vs fuel issue?",
-o:["Productivity","Food security","Biodiversity","Water access"],
-a:"Food security"},
-{q:"Why sustainability is wicked problem?",
-o:["Easy","Complex interconnected","No impact","Minimal collaboration"],
-a:"Complex interconnected"},
-{q:"Avoid CO2 emissions?",
-o:["Coal increase","CCS","Deforestation","Oil extraction"],
-a:"CCS"},
-{q:"Purpose of LCA?",
-o:["Weather","Environmental impact","Finance","Animals"],
-a:"Environmental impact"},
-{q:"Characterization in LCA?",
-o:["Specific event","Disposal","Quantify impacts","Lifecycle study"],
-a:"Quantify impacts"},
-{q:"ISO 14040 refers to?",
-o:["Years","LCA framework","Factory life","Carbon footprint"],
-a:"LCA framework"},
-{q:"LCA steps?",
-o:["Production etc","Extraction etc","Design etc","Goal, Inventory, Impact, Interpretation"],
-a:"Goal, Inventory, Impact, Interpretation"},
+{
+q:"How do oil spills typically impact marine ecosystems?",
+o:[
+"Enhancing marine biodiversity",
+"Providing nutrients for aquatic life",
+"Causing water purification",
+"Harms marine life and habitats"
+],
+a:"Harms marine life and habitats"
+},
+{
+q:"What is a social impact associated with the debate over biomass energy use for food versus fuel?",
+o:[
+"Increased agricultural productivity",
+"Food security concerns and potential impact on food prices",
+"Enhanced biodiversity in agricultural regions",
+"Improved access to clean water in rural areas"
+],
+a:"Food security concerns and potential impact on food prices"
+},
+{
+q:"Why is sustainability often considered a \"wicked\" problem?",
+o:[
+"Because it is easy to solve with straightforward solutions",
+"Due to its complex and interconnected nature, making solutions challenging",
+"Sustainability issues have no impact on society",
+"Because it requires minimal collaboration and stakeholder involvement"
+],
+a:"Due to its complex and interconnected nature, making solutions challenging"
+},
+{
+q:"What is one measure to avoid CO2 emissions from fossil fuel combustion?",
+o:[
+"Increasing coal consumption",
+"Carbon capture and storage (CCS)",
+"Encouraging deforestation",
+"Promoting oil extraction"
+],
+a:"Carbon capture and storage (CCS)"
+},
+{
+q:"What is the primary purpose of life cycle assessment (LCA)?",
+o:[
+"Analyzing daily weather patterns",
+"Evaluating the environmental impact of a product or process",
+"Assessing financial costs of projects",
+"Studying the life cycle of animals"
+],
+a:"Evaluating the environmental impact of a product or process"
+},
+{
+q:"In life cycle impact assessment, what does \"characterization\" involve?",
+o:[
+"Assessing the impact of a specific event",
+"Assessing the disposal stage of the product/service",
+"Quantifying the magnitude of environmental impacts",
+"Analyzing the life cycle of a product"
+],
+a:"Quantifying the magnitude of environmental impacts"
+},
+{
+q:"In the context of life cycle assessment (LCA), what does ISO 14040 refer to?",
+o:[
+"The number of years a product is expected to last",
+"The international standard outlining the principles and framework for conducting LCAs",
+"The average lifespan of a manufacturing facility",
+"The estimated carbon footprint of a product"
+],
+a:"The international standard outlining the principles and framework for conducting LCAs"
+},
+{
+q:"What are the four steps typically involved in a Life Cycle Assessment (LCA)?",
+o:[
+"Production, Consumption, Recycling, and Disposal",
+"Extraction, Manufacturing, Distribution, and End-of-life",
+"Design, Testing, Production, and Marketing",
+"Goal and Scope Definition, Life Cycle Inventory, Life Cycle Impact Assessment, and Interpretation"
+],
+a:"Goal and Scope Definition, Life Cycle Inventory, Life Cycle Impact Assessment, and Interpretation"
+},
 
 /* WEEK 8 */
-{q:"Boundary type excluding recycling?",
-o:["Cradle-Gate","Gate-Gate","Cradle-Grave","Cradle-Cradle"],
-a:"Cradle-Grave"},
-{q:"Impact score 75, unit 25?",
+{
+q:"If a company includes the disposal of materials after their useful life, but does not consider the recycled materials back for production of the product within the system boundaries, what type of boundary is being considered?",
+o:["Cradle-to-Gate","Gate-to-Gate","Cradle-to-Grave","Cradle-to-Cradle"],
+a:"Cradle-to-Grave"
+},
+{
+q:"If a product has a total environmental impact score of 75 and a functional unit of 25 units, what is the environmental impact per functional unit?",
 o:["3","15","75","300"],
-a:"3"},
-{q:"Steel 5kg, units 50?",
-o:["50","250","500","1250"],
-a:"250"},
-{q:"Better company (LCA)?",
-o:["X","Y","Both","Not enough"],
-a:"X"},
-{q:"LCA limitation?",
-o:["Env only","Qualitative","No standard","All"],
-a:"All"},
-{q:"10kg CO2 + 2kg CH4 (GWP 25)?",
-o:["10","25","50","60"],
-a:"60"},
-{q:"Solar vs coal emissions?",
-o:["200","1000","2000","4000"],
-a:"4000"},
-{q:"Goal & scope in LCA?",
-o:["Inventory","Define boundaries","Cost","Social"],
-a:"Define boundaries"}
+a:"3"
+},
+{
+q:"If a product requires 5 kg of steel during manufacturing, and the functional unit is 50 units, what is the total steel consumption for the entire production?",
+o:["50 kg","250 kg","500 kg","1250 kg"],
+a:"250 kg"
+},
+{
+q:"If in a LCA study, company X produces 10 units of a product with 200 kg CO2 eq emissions and company Y produces 3 units with 90 kg CO2 eq emissions. If the functional unit is 1 unit, which company is more environmentally sustainable?",
+o:["Company X","Company Y","Both are equally sustainable","Not enough data to comment"],
+a:"Company X"
+},
+{
+q:"What are the limitations of LCA in assessing the social impacts of food production, assuming a study wants to evaluate the impact on farmers' livelihoods?",
+o:[
+"LCA primarily focuses on environmental impacts",
+"Social impacts are often qualitative and difficult to quantify",
+"Current LCA methodologies lack standardized methods for social assessment",
+"All of the above"
+],
+a:"All of the above"
+},
+{
+q:"If a process emits 10 kg CO2 and 2 kg of methane with a GWP of 25, then what is the total emission from this process?",
+o:["10 kg CO2 eq","25 kg CO2 eq","50 kg CO2 eq","60 kg CO2 eq"],
+a:"60 kg CO2 eq"
+},
+{
+q:"In a LCA study producing electricity from a solar panel causes 0.1 kg CO2 eq/unit of emissions and a total emissions of 200 kg CO2 eq. What will be the total emissions if the same amount of electricity is generated from a coal based grid with an emissions value of 2 kg CO2 eq/unit of electricity?",
+o:["200 kg CO2 eq","1000 kg CO2 eq","2000 kg CO2 eq","4000 kg CO2 eq"],
+a:"4000 kg CO2 eq"
+},
+{
+q:"What is the primary purpose of defining the goal and scope in Life Cycle Assessment (LCA)?",
+o:[
+"To build a data inventory",
+"To establish the boundaries and objectives of the study",
+"To determine the financial costs associated with a life cycle",
+"To analyze the social implications of a product's life cycle"
+],
+a:"To establish the boundaries and objectives of the study"
+}
 
 ];
 
