@@ -1,1 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NPTEL MCQ Exam (Week 1–4)</title>
+<style>
+body { font-family: Arial; background:#f4f6f8; padding:20px;}
+h1 { text-align:center;}
+.question { background:white; padding:15px; margin-bottom:15px; border-radius:10px;}
+.correct { color:green; font-weight:bold;}
+.wrong { color:red; font-weight:bold;}
+button { padding:12px 25px; font-size:16px; background:green; color:white; border:none; border-radius:6px;}
+</style>
+</head>
 
+<body>
+
+<h1>NPTEL MCQ Exam (Week 1–4)</h1>
+<form id="quizForm"></form>
+<button onclick="submitQuiz()">Submit</button>
+<h2 id="score"></h2>
+
+<script>
+
+function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
+
+const quizData = [
+
+/* WEEK 1 */
+{q:"Which of the following gases is considered a greenhouse gas (GHG) and contributes to global warming?",
+o:["Oxygen (O2)","Carbon Dioxide (CO2)","Nitrogen (N2)","Water Vapour (H2O)"],
+a:"Carbon Dioxide (CO2)"},
+{q:"Why should India move away from fossil fuels use?",
+o:["CO2 emissions","Import dependence","Price fluctuations","All of the above"],
+a:"All of the above"},
+{q:"What is the relationship between global temperature and carbon dioxide (CO2) concentration?",
+o:["As CO2 increases, global temperature decreases","There is no correlation","As CO2 increases, global temperature increases","Remain constant"],
+a:"As CO2 increases, global temperature increases"},
+{q:"Which layer of the Earth's atmosphere is closest to the planet's surface and where weather occurs?",
+o:["Troposphere","Stratosphere","Mesosphere","Thermosphere"],
+a:"Troposphere"},
+{q:"Which of the following is a type of biomass source used for energy production?",
+o:["Coal","Natural Gas","Wood and Crop Residues","Petroleum"],
+a:"Wood and Crop Residues"},
+{q:"Which of the following is a non-renewable energy source?",
+o:["Wind","Solar","Natural Gas","Biomass"],
+a:"Natural Gas"},
+{q:"What are the problems associated with fossil fuels?",
+o:["Increased biodiversity","Enhanced air quality","Greenhouse gas emissions leading to climate change","Growth of renewables"],
+a:"Greenhouse gas emissions leading to climate change"},
+{q:"In a typical Europe household, which sector consumes the maximum energy?",
+o:["Lighting","Water heating and space heating","Refrigeration","Cooking"],
+a:"Water heating and space heating"},
+
+/* WEEK 2 */
+{q:"What does the correlation between energy consumption and GDP per person suggest?",
+o:["Higher consumption leads to lower GDP","No correlation","Higher GDP per person is typically associated with higher energy consumption","Inverse relation"],
+a:"Higher GDP per person is typically associated with higher energy consumption"},
+{q:"A machine has input power 500W and output 400W. Waste power?",
+o:["100 watts","400 watts","500 watts","600 watts"],
+a:"100 watts"},
+{q:"Input 1500 kW, output 600 kW. Efficiency?",
+o:["20%","40%","60%","80%"],
+a:"40%"},
+{q:"Which hydrogen is produced using renewable energy?",
+o:["Green","Blue","Grey","Yellow"],
+a:"Green"},
+{q:"In Kaya identity, if population increases, emissions?",
+o:["Decrease","Increase","No impact","Constant"],
+a:"Increase"},
+{q:"Primary objective of net zero?",
+o:["Reduce efficiency","Offset carbon emissions completely","Increase consumption","Encourage deforestation"],
+a:"Offset carbon emissions completely"},
+{q:"Transmission losses refer to?",
+o:["TV broadcasting loss","Losses in power lines","Signal loss radio","Appliance inefficiency"],
+a:"Losses in power lines"},
+{q:"Best model for extinction estimate?",
+o:["Hubbert curve","Static R/P","Exponential","All same"],
+a:"Hubbert curve"},
+
+/* WEEK 3 */
+{q:"Primary focus of energy economics?",
+o:["Renewables only","Economic aspects of production and consumption","Physics only","Environmental impacts only"],
+a:"Economic aspects of production and consumption"},
+{q:"Future value of $2000/year for 5 years (6%)?",
+o:["12602.17","11274.19","13320","9433.96"],
+a:"11274.19"},
+{q:"Payback period for 500k cost & 100k/year?",
+o:["2","3","4","5"],
+a:"5"},
+{q:"NPV represents?",
+o:["Total cost","Worth discounted to today","Revenue","ROI"],
+a:"Worth discounted to today"},
+{q:"Life Cycle Cost?",
+o:["Initial cost","Total cost over lifespan","Production cost","Recycling cost"],
+a:"Total cost over lifespan"},
+{q:"Future value of 1000 @5% 4yrs?",
+o:["1215.51","1157.50","1556.60","1656.75"],
+a:"1215.51"},
+{q:"AWM same as NPV?",
+o:["True","False","Partial","NA"],
+a:"True"},
+{q:"Depreciation 10k/5yrs?",
+o:["1000","2000","2500","5000"],
+a:"2000"},
+
+/* WEEK 4 */
+{q:"LCOE represents?",
+o:["Initial cost","Average cost over lifetime","Market price","Fuel cost"],
+a:"Average cost over lifetime"},
+{q:"O&M cost?",
+o:["Initial cost","Setup cost","Day-to-day operations","Decommission"],
+a:"Day-to-day operations"},
+{q:"Free market price determined by?",
+o:["Govt","Central planning","Supply & demand","Barter"],
+a:"Supply & demand"},
+{q:"Purpose of BESS?",
+o:["Generate","Store energy","Hydro control","Air control"],
+a:"Store energy"},
+{q:"Three pillars sustainability?",
+o:["Water air soil","3R","Social economic environmental","Forest ocean desert"],
+a:"Social economic environmental"},
+{q:"Ecosystems relation?",
+o:["No impact","Provide resources","No role","Irrelevant"],
+a:"Provide resources"},
+{q:"Ecosystem services?",
+o:["Study","Goods/services","Biodiversity %","Regulation"],
+a:"Goods/services"},
+{q:"Why incentives?",
+o:["Discourage RE","Increase cost","Promote sustainable energy","Burden producers"],
+a:"Promote sustainable energy"}
+
+];
+
+const questions = shuffle([...quizData]);
+const form = document.getElementById("quizForm");
+
+questions.forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+
+let opts=shuffle([...q.o]);
+
+div.innerHTML=`<p>${i+1}) ${q.q}</p>`;
+opts.forEach(o=>{
+div.innerHTML+=`<label><input type="radio" name="q${i}" value="${o}">${o}</label><br>`;
+});
+div.innerHTML+=`<p id="r${i}"></p>`;
+
+form.appendChild(div);
+});
+
+function submitQuiz(){
+let score=0;
+
+questions.forEach((q,i)=>{
+let sel=document.querySelector(`input[name=q${i}]:checked`);
+let res=document.getElementById(`r${i}`);
+
+if(sel){
+if(sel.value===q.a){
+score++;
+res.innerHTML="✅ Correct";
+res.className="correct";
+}else{
+res.innerHTML="❌ Wrong | Correct: "+q.a;
+res.className="wrong";
+}
+}else{
+res.innerHTML="❌ Not Answered | Correct: "+q.a;
+res.className="wrong";
+}
+});
+
+document.getElementById("score").innerText=
+`Final Score: ${score} / ${questions.length}`;
+}
+
+</script>
+</body>
+</html>
