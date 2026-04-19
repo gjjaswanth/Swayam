@@ -1,1 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NPTEL MCQ Exam (Week 5–8)</title>
+<style>
+body { font-family: Arial; background:#f4f6f8; padding:20px;}
+h1 { text-align:center;}
+.question { background:white; padding:15px; margin-bottom:15px; border-radius:10px;}
+.correct { color:green; font-weight:bold;}
+.wrong { color:red; font-weight:bold;}
+button { padding:12px 25px; font-size:16px; background:green; color:white; border:none; border-radius:6px;}
+</style>
+</head>
 
+<body>
+
+<h1>MCQ Exam (Week 5–8)</h1>
+<form id="quizForm"></form>
+<button onclick="submitQuiz()">Submit</button>
+<h2 id="score"></h2>
+
+<script>
+
+function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
+
+const quizData = [
+
+/* WEEK 5 */
+{q:"What is the primary cause of acid rain?",
+o:["Carbon dioxide emissions","Sulfur and nitrogen oxide emissions","Methane emissions","Ozone depletion"],
+a:"Sulfur and nitrogen oxide emissions"},
+{q:"How is sulfur content typically reduced in crude oil?",
+o:["Desalination","Adding lead compounds","Carbon capture","Desulfurization"],
+a:"Desulfurization"},
+{q:"Common method to reduce SO2 emissions?",
+o:["Add sulfur","Carbon capture","Install scrubbers","Lead additives"],
+a:"Install scrubbers"},
+{q:"How was engine knocking avoided?",
+o:["Reducing efficiency","Adding lead compounds","Increasing air intake","Using ethanol"],
+a:"Adding lead compounds"},
+{q:"True statement about lead pigment pollution?",
+o:["No risk","Natural weathering source","Promote lead paints","Risks mitigated via abatement"],
+a:"Risks mitigated via abatement"},
+{q:"Impact of Chernobyl disaster?",
+o:["Increased biodiversity","Better agriculture","Radioactive contamination","Habitat preservation"],
+a:"Radioactive contamination"},
+{q:"Reason for phase-out of leaded petrol?",
+o:["Cost","Performance","Environmental and health concerns","Lead availability"],
+a:"Environmental and health concerns"},
+{q:"Gas pollutant in lower atmosphere but useful in stratosphere?",
+o:["N2O","Ozone","CO2","CH4"],
+a:"Ozone"},
+
+/* WEEK 6 */
+{q:"Most common greenhouse gas?",
+o:["N2O","CH4","CO2","SF6"],
+a:"CO2"},
+{q:"Term for CO2, CH4, N2O group?",
+o:["GHGs","ODS","Air pollutants","Aerosols"],
+a:"GHGs"},
+{q:"Mitigation actions include?",
+o:["Deforestation","Fossil fuel increase","Reduce GHG + sequestration","Ignore renewables"],
+a:"Reduce GHG + sequestration"},
+{q:"Weather vs climate?",
+o:["Weather long-term","Climate short-term","Same","Weather short-term, climate long-term"],
+a:"Weather short-term, climate long-term"},
+{q:"CCS involves?",
+o:["Increase emissions","Fuel increase","Capture & store CO2","Release CO2"],
+a:"Capture & store CO2"},
+{q:"Kyoto Protocol?",
+o:["Deforestation","GHG treaty","Fossil increase","Nuclear plan"],
+a:"GHG treaty"},
+{q:"Impact of nuclear waste?",
+o:["Soil fertility","Biodiversity","Radioactive contamination","Less pollution"],
+a:"Radioactive contamination"},
+{q:"Excess nutrients in water?",
+o:["Acidification","Desalination","Eutrophication","Filtration"],
+a:"Eutrophication"},
+
+/* WEEK 7 */
+{q:"Oil spills impact?",
+o:["Increase biodiversity","Provide nutrients","Purify water","Harm marine life"],
+a:"Harm marine life"},
+{q:"Biomass food vs fuel issue?",
+o:["Productivity","Food security","Biodiversity","Water access"],
+a:"Food security"},
+{q:"Why sustainability is wicked problem?",
+o:["Easy","Complex interconnected","No impact","Minimal collaboration"],
+a:"Complex interconnected"},
+{q:"Avoid CO2 emissions?",
+o:["Coal increase","CCS","Deforestation","Oil extraction"],
+a:"CCS"},
+{q:"Purpose of LCA?",
+o:["Weather","Environmental impact","Finance","Animals"],
+a:"Environmental impact"},
+{q:"Characterization in LCA?",
+o:["Specific event","Disposal","Quantify impacts","Lifecycle study"],
+a:"Quantify impacts"},
+{q:"ISO 14040 refers to?",
+o:["Years","LCA framework","Factory life","Carbon footprint"],
+a:"LCA framework"},
+{q:"LCA steps?",
+o:["Production etc","Extraction etc","Design etc","Goal, Inventory, Impact, Interpretation"],
+a:"Goal, Inventory, Impact, Interpretation"},
+
+/* WEEK 8 */
+{q:"Boundary type excluding recycling?",
+o:["Cradle-Gate","Gate-Gate","Cradle-Grave","Cradle-Cradle"],
+a:"Cradle-Grave"},
+{q:"Impact score 75, unit 25?",
+o:["3","15","75","300"],
+a:"3"},
+{q:"Steel 5kg, units 50?",
+o:["50","250","500","1250"],
+a:"250"},
+{q:"Better company (LCA)?",
+o:["X","Y","Both","Not enough"],
+a:"X"},
+{q:"LCA limitation?",
+o:["Env only","Qualitative","No standard","All"],
+a:"All"},
+{q:"10kg CO2 + 2kg CH4 (GWP 25)?",
+o:["10","25","50","60"],
+a:"60"},
+{q:"Solar vs coal emissions?",
+o:["200","1000","2000","4000"],
+a:"4000"},
+{q:"Goal & scope in LCA?",
+o:["Inventory","Define boundaries","Cost","Social"],
+a:"Define boundaries"}
+
+];
+
+const questions = shuffle([...quizData]);
+const form = document.getElementById("quizForm");
+
+questions.forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+
+let opts=shuffle([...q.o]);
+
+div.innerHTML=`<p>${i+1}) ${q.q}</p>`;
+opts.forEach(o=>{
+div.innerHTML+=`<label><input type="radio" name="q${i}" value="${o}">${o}</label><br>`;
+});
+div.innerHTML+=`<p id="r${i}"></p>`;
+
+form.appendChild(div);
+});
+
+function submitQuiz(){
+let score=0;
+
+questions.forEach((q,i)=>{
+let sel=document.querySelector(`input[name=q${i}]:checked`);
+let res=document.getElementById(`r${i}`);
+
+if(sel){
+if(sel.value===q.a){
+score++;
+res.innerHTML="✅ Correct";
+res.className="correct";
+}else{
+res.innerHTML="❌ Wrong | Correct: "+q.a;
+res.className="wrong";
+}
+}else{
+res.innerHTML="❌ Not Answered | Correct: "+q.a;
+res.className="wrong";
+}
+});
+
+document.getElementById("score").innerText=
+`Final Score: ${score} / ${questions.length}`;
+}
+
+</script>
+</body>
+</html>
