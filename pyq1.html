@@ -26,108 +26,262 @@ function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
 const quizData = [
 
 /* WEEK 1 */
-{q:"Which of the following gases is considered a greenhouse gas (GHG) and contributes to global warming?",
+{
+q:"Which of the following gases is considered a greenhouse gas (GHG) and contributes to global warming?",
 o:["Oxygen (O2)","Carbon Dioxide (CO2)","Nitrogen (N2)","Water Vapour (H2O)"],
-a:"Carbon Dioxide (CO2)"},
-{q:"Why should India move away from fossil fuels use?",
+a:"Carbon Dioxide (CO2)"
+},
+{
+q:"Why should India move away from fossil fuels use?",
 o:["CO2 emissions","Import dependence","Price fluctuations","All of the above"],
-a:"All of the above"},
-{q:"What is the relationship between global temperature and carbon dioxide (CO2) concentration?",
-o:["As CO2 increases, global temperature decreases","There is no correlation","As CO2 increases, global temperature increases","Remain constant"],
-a:"As CO2 increases, global temperature increases"},
-{q:"Which layer of the Earth's atmosphere is closest to the planet's surface and where weather occurs?",
+a:"All of the above"
+},
+{
+q:"What is the relationship between global temperature and carbon dioxide (CO2) concentration?",
+o:[
+"As CO2 increases, global temperature decreases",
+"There is no correlation between CO2 and global temperature",
+"As CO2 increases, global temperature increases",
+"Global temperature and CO2 concentration remain constant"
+],
+a:"As CO2 increases, global temperature increases"
+},
+{
+q:"Which layer of the Earth's atmosphere is closest to the planet's surface and where weather events, such as clouds and precipitation, occur?",
 o:["Troposphere","Stratosphere","Mesosphere","Thermosphere"],
-a:"Troposphere"},
-{q:"Which of the following is a type of biomass source used for energy production?",
+a:"Troposphere"
+},
+{
+q:"Which of the following is a type of biomass source used for energy production?",
 o:["Coal","Natural Gas","Wood and Crop Residues","Petroleum"],
-a:"Wood and Crop Residues"},
-{q:"Which of the following is a non-renewable energy source?",
+a:"Wood and Crop Residues"
+},
+{
+q:"Which of the following is a non-renewable energy source?",
 o:["Wind","Solar","Natural Gas","Biomass"],
-a:"Natural Gas"},
-{q:"What are the problems associated with fossil fuels?",
-o:["Increased biodiversity","Enhanced air quality","Greenhouse gas emissions leading to climate change","Growth of renewables"],
-a:"Greenhouse gas emissions leading to climate change"},
-{q:"In a typical Europe household, which sector consumes the maximum energy?",
-o:["Lighting","Water heating and space heating","Refrigeration","Cooking"],
-a:"Water heating and space heating"},
+a:"Natural Gas"
+},
+{
+q:"What are the problems associated with fossil fuels?",
+o:[
+"Increased biodiversity and ecological balance",
+"Enhanced air quality and reduced respiratory illnesses",
+"Greenhouse gas emissions leading to climate change",
+"Accelerated growth of renewable energy sources"
+],
+a:"Greenhouse gas emissions leading to climate change"
+},
+{
+q:"In a typical Europe household, which sector consumes the maximum energy?",
+o:[
+"Lighting and appliances",
+"Water heating and space heating",
+"Refrigeration and cooling",
+"Cooking and pumping"
+],
+a:"Water heating and space heating"
+},
 
 /* WEEK 2 */
-{q:"What does the correlation between energy consumption and GDP per person suggest?",
-o:["Higher consumption leads to lower GDP","No correlation","Higher GDP per person is typically associated with higher energy consumption","Inverse relation"],
-a:"Higher GDP per person is typically associated with higher energy consumption"},
-{q:"A machine has input power 500W and output 400W. Waste power?",
+{
+q:"What does the correlation between energy consumption and GDP per person suggest?",
+o:[
+"Higher energy consumption leads to lower GDP per person",
+"There is no correlation between energy consumption and GDP per person",
+"Higher GDP per person is typically associated with higher energy consumption",
+"Energy consumption and GDP per person are inversely related"
+],
+a:"Higher GDP per person is typically associated with higher energy consumption"
+},
+{
+q:"A machine has an input power of 500 watts and produces an output power of 400 watts. The waste power is:",
 o:["100 watts","400 watts","500 watts","600 watts"],
-a:"100 watts"},
-{q:"Input 1500 kW, output 600 kW. Efficiency?",
+a:"100 watts"
+},
+{
+q:"A machine has an input power of 1500 kW and produces an output power of 600 kW. Calculate the efficiency of the machine?",
 o:["20%","40%","60%","80%"],
-a:"40%"},
-{q:"Which hydrogen is produced using renewable energy?",
-o:["Green","Blue","Grey","Yellow"],
-a:"Green"},
-{q:"In Kaya identity, if population increases, emissions?",
-o:["Decrease","Increase","No impact","Constant"],
-a:"Increase"},
-{q:"Primary objective of net zero?",
-o:["Reduce efficiency","Offset carbon emissions completely","Increase consumption","Encourage deforestation"],
-a:"Offset carbon emissions completely"},
-{q:"Transmission losses refer to?",
-o:["TV broadcasting loss","Losses in power lines","Signal loss radio","Appliance inefficiency"],
-a:"Losses in power lines"},
-{q:"Best model for extinction estimate?",
-o:["Hubbert curve","Static R/P","Exponential","All same"],
-a:"Hubbert curve"},
+a:"40%"
+},
+{
+q:"Which type of hydrogen is produced using renewable energy sources such as wind or solar power?",
+o:["Green Hydrogen","Blue Hydrogen","Grey Hydrogen","Yellow Hydrogen"],
+a:"Green Hydrogen"
+},
+{
+q:"In the Kaya identity, if population increases, holding other factors constant, what happens to emissions?",
+o:["Emissions decrease","Emissions increase","No impact on emissions","Emissions remain constant"],
+a:"Emissions increase"
+},
+{
+q:"What is the primary objective of a \"net zero\" target in environmental initiatives?",
+o:[
+"To reduce energy efficiency",
+"To offset carbon emissions completely",
+"To increase resource consumption",
+"To encourage deforestation"
+],
+a:"To offset carbon emissions completely"
+},
+{
+q:"What are transmission losses in the context of electrical power?",
+o:[
+"Energy losses during TV broadcasting",
+"Losses in transporting electricity over power lines",
+"Decrease in signal strength during radio transmission",
+"Inefficiencies in the electrical appliances"
+],
+a:"Losses in transporting electricity over power lines"
+},
+{
+q:"Which of the following approach is expected to give the best estimate with respect to extinction of a resource?",
+o:[
+"Logistic supply curve (Hubbert curve)",
+"Static R/P model",
+"Exponential growth model",
+"All models will give the same estimate"
+],
+a:"Logistic supply curve (Hubbert curve)"
+},
 
 /* WEEK 3 */
-{q:"Primary focus of energy economics?",
-o:["Renewables only","Economic aspects of production and consumption","Physics only","Environmental impacts only"],
-a:"Economic aspects of production and consumption"},
-{q:"Future value of $2000/year for 5 years (6%)?",
-o:["12602.17","11274.19","13320","9433.96"],
-a:"11274.19"},
-{q:"Payback period for 500k cost & 100k/year?",
-o:["2","3","4","5"],
-a:"5"},
-{q:"NPV represents?",
-o:["Total cost","Worth discounted to today","Revenue","ROI"],
-a:"Worth discounted to today"},
-{q:"Life Cycle Cost?",
-o:["Initial cost","Total cost over lifespan","Production cost","Recycling cost"],
-a:"Total cost over lifespan"},
-{q:"Future value of 1000 @5% 4yrs?",
-o:["1215.51","1157.50","1556.60","1656.75"],
-a:"1215.51"},
-{q:"AWM same as NPV?",
-o:["True","False","Partial","NA"],
-a:"True"},
-{q:"Depreciation 10k/5yrs?",
-o:["1000","2000","2500","5000"],
-a:"2000"},
+{
+q:"What is the primary focus of energy economics?",
+o:[
+"Exploring renewable energy sources",
+"Analyzing the economic aspects of energy production and consumption",
+"Studying the physics of energy transformation",
+"Assessing environmental impacts of energy use"
+],
+a:"Analyzing the economic aspects of energy production and consumption"
+},
+{
+q:"If an energy plant becomes operational today and is expected to generate revenue of $2,000 per year over the next 5 years, what is the future value of this total revenue undertaking the time value of money? (Assume a discount rate of 6%)",
+o:["$12,602.17","$11,274.19","$13,320.00","$9,433.96"],
+a:"$11,274.19"
+},
+{
+q:"An energy plant has an initial cost of $500,000 and generates annual savings of $100,000. Calculate the payback period (neglecting the time value of money) for the energy plant?",
+o:["2 years","3 years","4 years","5 years"],
+a:"5 years"
+},
+{
+q:"In financial analysis, what does NPV (Net Present Value) represent?",
+o:[
+"Total investment cost",
+"How much an investment is worth throughout its lifetime, discounted to today's value",
+"Annual revenue generated",
+"Return on investment percentage"
+],
+a:"How much an investment is worth throughout its lifetime, discounted to today's value"
+},
+{
+q:"What does Life Cycle Cost (LCC) in the context of a product or project refer to?",
+o:[
+"Only the initial purchase cost",
+"The total cost over the entire lifespan, including purchase, operation, maintenance, and disposal",
+"The cost incurred during the production phase",
+"The cost of recycling the product"
+],
+a:"The total cost over the entire lifespan, including purchase, operation, maintenance, and disposal"
+},
+{
+q:"If you invest $1,000 today at an annual interest rate of 5%, what will be the future value of the investment after 4 years? (Assume compound interest)",
+o:["$1,215.51","$1,157.50","$1,556.60","$1,656.75"],
+a:"$1,215.51"
+},
+{
+q:"Statement: The annual worth method (AWM) is based on the same principles as the NPV method to discount future cash inflows and outflows",
+o:["True","False","Partially True","Not Applicable"],
+a:"True"
+},
+{
+q:"A piece of equipment is purchased for $10,000 with a useful life of 5 years and no salvage value. Using straight-line depreciation, what is the annual depreciation expense?",
+o:["$1,000","$2,000","$2,500","$5,000"],
+a:"$2,000"
+},
 
 /* WEEK 4 */
-{q:"LCOE represents?",
-o:["Initial cost","Average cost over lifetime","Market price","Fuel cost"],
-a:"Average cost over lifetime"},
-{q:"O&M cost?",
-o:["Initial cost","Setup cost","Day-to-day operations","Decommission"],
-a:"Day-to-day operations"},
-{q:"Free market price determined by?",
-o:["Govt","Central planning","Supply & demand","Barter"],
-a:"Supply & demand"},
-{q:"Purpose of BESS?",
-o:["Generate","Store energy","Hydro control","Air control"],
-a:"Store energy"},
-{q:"Three pillars sustainability?",
-o:["Water air soil","3R","Social economic environmental","Forest ocean desert"],
-a:"Social economic environmental"},
-{q:"Ecosystems relation?",
-o:["No impact","Provide resources","No role","Irrelevant"],
-a:"Provide resources"},
-{q:"Ecosystem services?",
-o:["Study","Goods/services","Biodiversity %","Regulation"],
-a:"Goods/services"},
-{q:"Why incentives?",
-o:["Discourage RE","Increase cost","Promote sustainable energy","Burden producers"],
-a:"Promote sustainable energy"}
+{
+q:"What does the Levelized Cost of Electricity (LCOE) represent in the energy industry?",
+o:[
+"The initial cost of building a power plant",
+"The average cost of electricity production over the plant's lifetime",
+"The current market price of electricity",
+"The cost of fuel for a power plant"
+],
+a:"The average cost of electricity production over the plant's lifetime"
+},
+{
+q:"What does Operation and Maintenance (O&M) cost represent in the context of a power plant?",
+o:[
+"The initial construction cost",
+"Initial plant setup expenses",
+"The cost of day-to-day operations and upkeep",
+"The decommissioning cost of the plant"
+],
+a:"The cost of day-to-day operations and upkeep"
+},
+{
+q:"In a free market economy, how are prices typically determined?",
+o:[
+"Government regulations",
+"Centralized planning",
+"Supply and demand forces",
+"Bartering and trade agreements"
+],
+a:"Supply and demand forces"
+},
+{
+q:"What is the primary purpose of a battery energy storage system (BESS)?",
+o:[
+"To generate electricity",
+"To store and release electrical energy",
+"To regulate water flow in hydroelectric plants",
+"To control air quality in industrial areas"
+],
+a:"To store and release electrical energy"
+},
+{
+q:"Which of the following represents the three pillars of sustainability?",
+o:[
+"Water, Air, and Soil",
+"Reduce, Reuse, Recycle",
+"Social, Economic, Environmental",
+"Forest, Ocean, Desert"
+],
+a:"Social, Economic, Environmental"
+},
+{
+q:"How do ecosystems relate to economic activities?",
+o:[
+"Ecosystems have no impact on economic activities",
+"Ecosystems provide resources and services that form the basis of all economic activities",
+"Ecosystems have no part in environmental protection",
+"Ecosystems are only important for environmentalists and not relevant to economics"
+],
+a:"Ecosystems provide resources and services that form the basis of all economic activities"
+},
+{
+q:"In the context of the interaction between ecosystems, society, and the economy, what does the term \"ecosystem services\" refer to?",
+o:[
+"The scientific study of ecological systems",
+"Goods and services that ecosystems provide to human well-being",
+"The percentage of biodiversity within an ecosystem",
+"Economic regulations imposed on ecosystems"
+],
+a:"Goods and services that ecosystems provide to human well-being"
+},
+{
+q:"Why are incentives often provided to energy-based projects?",
+o:[
+"To discourage the use of renewable energy sources",
+"To increase the cost of energy production",
+"To promote the use of sustainable and environmentally friendly energy sources",
+"To create financial burdens for energy producers"
+],
+a:"To promote the use of sustainable and environmentally friendly energy sources"
+}
 
 ];
 
