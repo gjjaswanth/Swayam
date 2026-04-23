@@ -1,136 +1,238 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Energy Exam Portal</title>
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: linear-gradient(135deg, #000000, #8B0000, #ff0000, #000000);
-    background-size: 400% 400%;
-    animation: bgAnimation 10s ease infinite;
-    color: white;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GJ Games</title>
+    <!-- Google Fonts for the "Old Money" aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --text-color: #f5f5f5;
+            --card-bg: #1a1a1a;
+            --border-color: #333333;
+            --accent-color: #ffffff;
+            --hover-bg: #2a2a2a;
+            --text-muted: #a0a0a0;
+        }
 
-/* Background animation */
-@keyframes bgAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-/* LOGIN SCREEN */
-#login {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 9999;
-}
+        /* Subtle background texture/gradient for depth */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-#login input {
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    margin-top: 10px;
-}
+        .header {
+            margin-top: 8vh;
+            margin-bottom: 5vh;
+            text-align: center;
+            z-index: 1;
+        }
 
-#login button {
-    padding: 10px 20px;
-    margin-top: 15px;
-    background: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0 0 15px 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
 
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
 
+        .header .divider {
+            width: 60px;
+            height: 2px;
+            background-color: var(--border-color);
+            margin: 25px auto;
+        }
 
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 20px 60px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
 
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* Header */
-.header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 30vh;
-}
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
 
-.container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
 
-.card {
-    background: rgba(255,255,255,0.1);
-    padding: 30px;
-    border-radius: 10px;
-    width: 280px;
-}
+        .card:hover::before {
+            opacity: 1;
+        }
 
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px;
-    background: green;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+        }
 
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-    color: #bbb;
-}
-</style>
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0 0 30px 0;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: transparent;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-color: var(--accent-color);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+        
+        .card.featured {
+            grid-column: 1 / -1;
+            border-color: #444;
+            background: linear-gradient(145deg, #1f1f1f, #151515);
+        }
+        
+        .card.featured h2 {
+            font-size: 2.2rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="main">
-
-
-<div class="header">
-    <h1>⚡ Energy Exam Portal</h1>
-    <p>Practice MCQs from Weeks 1–8 for A Grade</p>
-</div>
-
-<div class="container">
-    <div class="card">
-        <h2>Week 1–4</h2>
-        <a href="part1.html" class="btn">Start Test</a>
+    <div class="header">
+        <h1>Welcome to the GJ Games</h1>
+        <div class="divider"></div>
+        <p>Select your challenge. Only the sharpest prevail.</p>
     </div>
 
-    <div class="card">
-        <h2>Week 5–8</h2>
-        <a href="part2.html" class="btn">Start Test</a>
+    <div class="container">
+        <div class="card">
+            <h2>Part 1</h2>
+            <p>Master the fundamentals from Weeks 1–4. Precision is key.</p>
+            <a href="part1.html" class="btn">Commence</a>
+        </div>
+
+        <div class="card">
+            <h2>Part 2</h2>
+            <p>Advance through Weeks 5–8. The stakes are higher.</p>
+            <a href="part2.html" class="btn">Commence</a>
+        </div>
+
+        <div class="card">
+            <h2>PYQ 1</h2>
+            <p>Previous Year Questions. Learn from history.</p>
+            <a href="pyq1.html" class="btn">Commence</a>
+        </div>
+
+        <div class="card">
+            <h2>PYQ 2</h2>
+            <p>More historical trials to sharpen your intellect.</p>
+            <a href="pyq2.html" class="btn">Commence</a>
+        </div>
+
+        <div class="card featured">
+            <h2>The Grand Combined (Part 1 & 2)</h2>
+            <p>A rigorous 64-question gauntlet encompassing all weeks. Questions are randomized for the ultimate test of endurance and knowledge.</p>
+            <a href="part1_2_combined.html" class="btn">Accept the Challenge</a>
+        </div>
+
+        <div class="card featured">
+            <h2>The Grand Combined (PYQ 1 & 2)</h2>
+            <p>64 randomized questions drawn from all past year archives. Prove your mastery over historical precedents.</p>
+            <a href="pyq1_2_combined.html" class="btn">Accept the Challenge</a>
+        </div>
     </div>
-
-    <div class="card">
-        <h2>PYQ-1</h2>
-        <a href="pyq1.html" class="btn">Start Test</a>
-    </div>
-
-    <div class="card">
-        <h2>PYQ-2</h2>
-        <a href="pyq2.html" class="btn">Start Test</a>
-    </div>
-</div>
-
-</div>
-
 
 </body>
 </html>

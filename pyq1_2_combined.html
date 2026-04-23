@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Combined Exam (PYQ 1 & 2)</title>
+<style>
+body { font-family: 'Inter', Arial, sans-serif; background:#f4f6f8; padding:20px; }
+h1 { text-align:center; }
+.question { background:white; padding:15px; margin-bottom:15px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.correct { color:green; font-weight:bold; }
+.wrong { color:red; font-weight:bold; }
+button { padding:12px 25px; font-size:16px; background:#222; color:white; border:none; border-radius:6px; cursor:pointer; transition: background 0.2s; }
+button:hover { background: #000; }
+label { display: block; margin-top: 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>Combined Exam (PYQ 1 & 2)</h1>
+<form id="quizForm"></form>
+<button onclick="submitQuiz()">Submit</button>
+<h2 id="score"></h2>
+
+<script>
+function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+
+const quizData = [
+/* WEEK 1 */
+{
+q:"Which of the following gases is considered a greenhouse gas (GHG) and contributes to global warming?",
+o:["Oxygen (O2)","Carbon Dioxide (CO2)","Nitrogen (N2)","Water Vapour (H2O)"],
+a:"Carbon Dioxide (CO2)"
+},
+{
+q:"Why should India move away from fossil fuels use?",
+o:["CO2 emissions","Import dependence","Price fluctuations","All of the above"],
+a:"All of the above"
+},
+{
+q:"What is the relationship between global temperature and carbon dioxide (CO2) concentration?",
+o:[
+"As CO2 increases, global temperature decreases",
+"There is no correlation between CO2 and global temperature",
+"As CO2 increases, global temperature increases",
+"Global temperature and CO2 concentration remain constant"
+],
+a:"As CO2 increases, global temperature increases"
+},
+{
+q:"Which layer of the Earth's atmosphere is closest to the planet's surface and where weather events, such as clouds and precipitation, occur?",
+o:["Troposphere","Stratosphere","Mesosphere","Thermosphere"],
+a:"Troposphere"
+},
+{
+q:"Which of the following is a type of biomass source used for energy production?",
+o:["Coal","Natural Gas","Wood and Crop Residues","Petroleum"],
+a:"Wood and Crop Residues"
+},
+{
+q:"Which of the following is a non-renewable energy source?",
+o:["Wind","Solar","Natural Gas","Biomass"],
+a:"Natural Gas"
+},
+{
+q:"What are the problems associated with fossil fuels?",
+o:[
+"Increased biodiversity and ecological balance",
+"Enhanced air quality and reduced respiratory illnesses",
+"Greenhouse gas emissions leading to climate change",
+"Accelerated growth of renewable energy sources"
+],
+a:"Greenhouse gas emissions leading to climate change"
+},
+{
+q:"In a typical Europe household, which sector consumes the maximum energy?",
+o:[
+"Lighting and appliances",
+"Water heating and space heating",
+"Refrigeration and cooling",
+"Cooking and pumping"
+],
+a:"Water heating and space heating"
+},
+
+/* WEEK 2 */
+{
+q:"What does the correlation between energy consumption and GDP per person suggest?",
+o:[
+"Higher energy consumption leads to lower GDP per person",
+"There is no correlation between energy consumption and GDP per person",
+"Higher GDP per person is typically associated with higher energy consumption",
+"Energy consumption and GDP per person are inversely related"
+],
+a:"Higher GDP per person is typically associated with higher energy consumption"
+},
+{
+q:"A machine has an input power of 500 watts and produces an output power of 400 watts. The waste power is:",
+o:["100 watts","400 watts","500 watts","600 watts"],
+a:"100 watts"
+},
+{
+q:"A machine has an input power of 1500 kW and produces an output power of 600 kW. Calculate the efficiency of the machine?",
+o:["20%","40%","60%","80%"],
+a:"40%"
+},
+{
+q:"Which type of hydrogen is produced using renewable energy sources such as wind or solar power?",
+o:["Green Hydrogen","Blue Hydrogen","Grey Hydrogen","Yellow Hydrogen"],
+a:"Green Hydrogen"
+},
+{
+q:"In the Kaya identity, if population increases, holding other factors constant, what happens to emissions?",
+o:["Emissions decrease","Emissions increase","No impact on emissions","Emissions remain constant"],
+a:"Emissions increase"
+},
+{
+q:"What is the primary objective of a \"net zero\" target in environmental initiatives?",
+o:[
+"To reduce energy efficiency",
+"To offset carbon emissions completely",
+"To increase resource consumption",
+"To encourage deforestation"
+],
+a:"To offset carbon emissions completely"
+},
+{
+q:"What are transmission losses in the context of electrical power?",
+o:[
+"Energy losses during TV broadcasting",
+"Losses in transporting electricity over power lines",
+"Decrease in signal strength during radio transmission",
+"Inefficiencies in the electrical appliances"
+],
+a:"Losses in transporting electricity over power lines"
+},
+{
+q:"Which of the following approach is expected to give the best estimate with respect to extinction of a resource?",
+o:[
+"Logistic supply curve (Hubbert curve)",
+"Static R/P model",
+"Exponential growth model",
+"All models will give the same estimate"
+],
+a:"Logistic supply curve (Hubbert curve)"
+},
+
+/* WEEK 3 */
+{
+q:"What is the primary focus of energy economics?",
+o:[
+"Exploring renewable energy sources",
+"Analyzing the economic aspects of energy production and consumption",
+"Studying the physics of energy transformation",
+"Assessing environmental impacts of energy use"
+],
+a:"Analyzing the economic aspects of energy production and consumption"
+},
+{
+q:"If an energy plant becomes operational today and is expected to generate revenue of $2,000 per year over the next 5 years, what is the future value of this total revenue undertaking the time value of money? (Assume a discount rate of 6%)",
+o:["$12,602.17","$11,274.19","$13,320.00","$9,433.96"],
+a:"$11,274.19"
+},
+{
+q:"An energy plant has an initial cost of $500,000 and generates annual savings of $100,000. Calculate the payback period (neglecting the time value of money) for the energy plant?",
+o:["2 years","3 years","4 years","5 years"],
+a:"5 years"
+},
+{
+q:"In financial analysis, what does NPV (Net Present Value) represent?",
+o:[
+"Total investment cost",
+"How much an investment is worth throughout its lifetime, discounted to today's value",
+"Annual revenue generated",
+"Return on investment percentage"
+],
+a:"How much an investment is worth throughout its lifetime, discounted to today's value"
+},
+{
+q:"What does Life Cycle Cost (LCC) in the context of a product or project refer to?",
+o:[
+"Only the initial purchase cost",
+"The total cost over the entire lifespan, including purchase, operation, maintenance, and disposal",
+"The cost incurred during the production phase",
+"The cost of recycling the product"
+],
+a:"The total cost over the entire lifespan, including purchase, operation, maintenance, and disposal"
+},
+{
+q:"If you invest $1,000 today at an annual interest rate of 5%, what will be the future value of the investment after 4 years? (Assume compound interest)",
+o:["$1,215.51","$1,157.50","$1,556.60","$1,656.75"],
+a:"$1,215.51"
+},
+{
+q:"Statement: The annual worth method (AWM) is based on the same principles as the NPV method to discount future cash inflows and outflows",
+o:["True","False","Partially True","Not Applicable"],
+a:"True"
+},
+{
+q:"A piece of equipment is purchased for $10,000 with a useful life of 5 years and no salvage value. Using straight-line depreciation, what is the annual depreciation expense?",
+o:["$1,000","$2,000","$2,500","$5,000"],
+a:"$2,000"
+},
+
+/* WEEK 4 */
+{
+q:"What does the Levelized Cost of Electricity (LCOE) represent in the energy industry?",
+o:[
+"The initial cost of building a power plant",
+"The average cost of electricity production over the plant's lifetime",
+"The current market price of electricity",
+"The cost of fuel for a power plant"
+],
+a:"The average cost of electricity production over the plant's lifetime"
+},
+{
+q:"What does Operation and Maintenance (O&M) cost represent in the context of a power plant?",
+o:[
+"The initial construction cost",
+"Initial plant setup expenses",
+"The cost of day-to-day operations and upkeep",
+"The decommissioning cost of the plant"
+],
+a:"The cost of day-to-day operations and upkeep"
+},
+{
+q:"In a free market economy, how are prices typically determined?",
+o:[
+"Government regulations",
+"Centralized planning",
+"Supply and demand forces",
+"Bartering and trade agreements"
+],
+a:"Supply and demand forces"
+},
+{
+q:"What is the primary purpose of a battery energy storage system (BESS)?",
+o:[
+"To generate electricity",
+"To store and release electrical energy",
+"To regulate water flow in hydroelectric plants",
+"To control air quality in industrial areas"
+],
+a:"To store and release electrical energy"
+},
+{
+q:"Which of the following represents the three pillars of sustainability?",
+o:[
+"Water, Air, and Soil",
+"Reduce, Reuse, Recycle",
+"Social, Economic, Environmental",
+"Forest, Ocean, Desert"
+],
+a:"Social, Economic, Environmental"
+},
+{
+q:"How do ecosystems relate to economic activities?",
+o:[
+"Ecosystems have no impact on economic activities",
+"Ecosystems provide resources and services that form the basis of all economic activities",
+"Ecosystems have no part in environmental protection",
+"Ecosystems are only important for environmentalists and not relevant to economics"
+],
+a:"Ecosystems provide resources and services that form the basis of all economic activities"
+},
+{
+q:"In the context of the interaction between ecosystems, society, and the economy, what does the term \"ecosystem services\" refer to?",
+o:[
+"The scientific study of ecological systems",
+"Goods and services that ecosystems provide to human well-being",
+"The percentage of biodiversity within an ecosystem",
+"Economic regulations imposed on ecosystems"
+],
+a:"Goods and services that ecosystems provide to human well-being"
+},
+{
+q:"Why are incentives often provided to energy-based projects?",
+o:[
+"To discourage the use of renewable energy sources",
+"To increase the cost of energy production",
+"To promote the use of sustainable and environmentally friendly energy sources",
+"To create financial burdens for energy producers"
+],
+a:"To promote the use of sustainable and environmentally friendly energy sources"
+},
+/* WEEK 5 */
+{
+q:"What is the primary cause of acid rain?",
+o:["Carbon dioxide emissions","Sulfur and nitrogen oxide emissions","Methane emissions","Ozone layer depletion"],
+a:"Sulfur and nitrogen oxide emissions"
+},
+{
+q:"How is sulfur content typically reduced in crude oil?",
+o:["Desalination","Adding lead-based compounds","Carbon capture","Desulfurization"],
+a:"Desulfurization"
+},
+{
+q:"What is a common method for reducing SO2 emissions in industrial processes?",
+o:["Introducing more sulfur into the combustion process","Implementing carbon capture and storage","Installing scrubbers or flue gas desulfurization systems","Using leaded additives in fuel"],
+a:"Installing scrubbers or flue gas desulfurization systems"
+},
+{
+q:"How was engine knocking avoided in internal combustion engines?",
+o:["Reducing fuel efficiency","Adding lead-based compounds such as (Pb(C2H5)4)","Increasing air intake","Using pure ethanol as fuel"],
+a:"Adding lead-based compounds such as (Pb(C2H5)4)"
+},
+{
+q:"Which of the following statements is true regarding lead-based pigment pollution and its abatement?",
+o:[
+"Lead-based pigments are environmentally benign and pose no risk to human health",
+"The main source of lead-based pigment pollution is natural weathering of rocks",
+"Abatement measures for lead-based pigment pollution include promoting the use of lead-based paints in construction",
+"The health risks associated with lead-based pigment pollution can be mitigated through proper abatement strategies"
+],
+a:"The health risks associated with lead-based pigment pollution can be mitigated through proper abatement strategies"
+},
+{
+q:"What is a significant environmental impact associated with the Chernobyl Disaster (Nuclear Accident)?",
+o:[
+"Increased biodiversity in the affected region",
+"Enhanced agricultural productivity near the disaster site",
+"Long-term radioactive contamination and adverse effects on ecosystems",
+"Preservation of natural habitats due to human evacuation"
+],
+a:"Long-term radioactive contamination and adverse effects on ecosystems"
+},
+{
+q:"What was the major reason for the global phase-out of leaded petrol?",
+o:["Cost-effectiveness","Enhanced engine performance","Environmental and health concerns","Increased availability of lead reserves"],
+a:"Environmental and health concerns"
+},
+{
+q:"Which gas is considered a pollutant in the lower atmosphere but plays a crucial role in the stratosphere?",
+o:["Nitrous oxide (N2O)","Ozone (O3)","Carbon dioxide (CO2)","Methane (CH4)"],
+a:"Ozone (O3)"
+},
+
+/* WEEK 6 */
+{
+q:"What is the most common gas responsible for the greenhouse effect on earth?",
+o:["Nitrous oxide (N2O)","Methane (CH4)","Carbon dioxide (CO2)","Sulfur hexafluoride (SF6)"],
+a:"Carbon dioxide (CO2)"
+},
+{
+q:"What is the collective term for gases such as CO2, methane, and nitrous oxide that contribute to the greenhouse effect?",
+o:["Greenhouse gases (GHGs)","Ozone-depleting substances (ODS)","Air pollutants","Aerosols"],
+a:"Greenhouse gases (GHGs)"
+},
+{
+q:"What characterizes mitigating actions on climate change?",
+o:[
+"Accelerating deforestation to reduce carbon emissions",
+"Increasing reliance on fossil fuels for energy production",
+"Implementing strategies to reduce greenhouse gas emissions and enhance carbon sequestration",
+"Ignoring renewable energy sources in favor of conventional methods"
+],
+a:"Implementing strategies to reduce greenhouse gas emissions and enhance carbon sequestration"
+},
+{
+q:"How is weather different from climate?",
+o:[
+"Weather refers to day-to-day atmospheric conditions, while climate is the long-term average",
+"Climate refers to day-to-day atmospheric conditions, while weather is the long-term average",
+"Weather and climate are interchangeable terms",
+"Weather and climate both describe short-term atmospheric conditions"
+],
+a:"Weather refers to day-to-day atmospheric conditions, while climate is the long-term average"
+},
+{
+q:"What does the process of Capture and Sequestration of CO2 (CCS) involve?",
+o:[
+"Increasing CO2 emissions from industrial processes",
+"Increasing CO2 emissions by elevating fuel consumption",
+"Capturing CO2 emissions from sources like power plants and storing them underground",
+"Releasing stored CO2 into the atmosphere for agricultural purposes"
+],
+a:"Capturing CO2 emissions from sources like power plants and storing them underground"
+},
+{
+q:"What is the Kyoto Protocol?",
+o:[
+"An international agreement to promote deforestation",
+"A treaty to regulate greenhouse gas emissions and combat climate change",
+"A global initiative to increase dependence on fossil fuels",
+"A framework for the development of nuclear energy"
+],
+a:"A treaty to regulate greenhouse gas emissions and combat climate change"
+},
+{
+q:"What is a potential environmental impact of nuclear waste in the long term?",
+o:["Enhanced soil fertility","Increased biodiversity","Radioactive contamination","Reduced air pollution"],
+a:"Radioactive contamination"
+},
+{
+q:"What is the term for the excessive nutrient enrichment of water bodies, often leading to algal blooms?",
+o:["Acidification","Desalination","Eutrophication","Filtration"],
+a:"Eutrophication"
+},
+
+/* WEEK 7 */
+{
+q:"How do oil spills typically impact marine ecosystems?",
+o:[
+"Enhancing marine biodiversity",
+"Providing nutrients for aquatic life",
+"Causing water purification",
+"Harms marine life and habitats"
+],
+a:"Harms marine life and habitats"
+},
+{
+q:"What is a social impact associated with the debate over biomass energy use for food versus fuel?",
+o:[
+"Increased agricultural productivity",
+"Food security concerns and potential impact on food prices",
+"Enhanced biodiversity in agricultural regions",
+"Improved access to clean water in rural areas"
+],
+a:"Food security concerns and potential impact on food prices"
+},
+{
+q:"Why is sustainability often considered a \"wicked\" problem?",
+o:[
+"Because it is easy to solve with straightforward solutions",
+"Due to its complex and interconnected nature, making solutions challenging",
+"Sustainability issues have no impact on society",
+"Because it requires minimal collaboration and stakeholder involvement"
+],
+a:"Due to its complex and interconnected nature, making solutions challenging"
+},
+{
+q:"What is one measure to avoid CO2 emissions from fossil fuel combustion?",
+o:[
+"Increasing coal consumption",
+"Carbon capture and storage (CCS)",
+"Encouraging deforestation",
+"Promoting oil extraction"
+],
+a:"Carbon capture and storage (CCS)"
+},
+{
+q:"What is the primary purpose of life cycle assessment (LCA)?",
+o:[
+"Analyzing daily weather patterns",
+"Evaluating the environmental impact of a product or process",
+"Assessing financial costs of projects",
+"Studying the life cycle of animals"
+],
+a:"Evaluating the environmental impact of a product or process"
+},
+{
+q:"In life cycle impact assessment, what does \"characterization\" involve?",
+o:[
+"Assessing the impact of a specific event",
+"Assessing the disposal stage of the product/service",
+"Quantifying the magnitude of environmental impacts",
+"Analyzing the life cycle of a product"
+],
+a:"Quantifying the magnitude of environmental impacts"
+},
+{
+q:"In the context of life cycle assessment (LCA), what does ISO 14040 refer to?",
+o:[
+"The number of years a product is expected to last",
+"The international standard outlining the principles and framework for conducting LCAs",
+"The average lifespan of a manufacturing facility",
+"The estimated carbon footprint of a product"
+],
+a:"The international standard outlining the principles and framework for conducting LCAs"
+},
+{
+q:"What are the four steps typically involved in a Life Cycle Assessment (LCA)?",
+o:[
+"Production, Consumption, Recycling, and Disposal",
+"Extraction, Manufacturing, Distribution, and End-of-life",
+"Design, Testing, Production, and Marketing",
+"Goal and Scope Definition, Life Cycle Inventory, Life Cycle Impact Assessment, and Interpretation"
+],
+a:"Goal and Scope Definition, Life Cycle Inventory, Life Cycle Impact Assessment, and Interpretation"
+},
+
+/* WEEK 8 */
+{
+q:"If a company includes the disposal of materials after their useful life, but does not consider the recycled materials back for production of the product within the system boundaries, what type of boundary is being considered?",
+o:["Cradle-to-Gate","Gate-to-Gate","Cradle-to-Grave","Cradle-to-Cradle"],
+a:"Cradle-to-Grave"
+},
+{
+q:"If a product has a total environmental impact score of 75 and a functional unit of 25 units, what is the environmental impact per functional unit?",
+o:["3","15","75","300"],
+a:"3"
+},
+{
+q:"If a product requires 5 kg of steel during manufacturing, and the functional unit is 50 units, what is the total steel consumption for the entire production?",
+o:["50 kg","250 kg","500 kg","1250 kg"],
+a:"250 kg"
+},
+{
+q:"If in a LCA study, company X produces 10 units of a product with 200 kg CO2 eq emissions and company Y produces 3 units with 90 kg CO2 eq emissions. If the functional unit is 1 unit, which company is more environmentally sustainable?",
+o:["Company X","Company Y","Both are equally sustainable","Not enough data to comment"],
+a:"Company X"
+},
+{
+q:"What are the limitations of LCA in assessing the social impacts of food production, assuming a study wants to evaluate the impact on farmers' livelihoods?",
+o:[
+"LCA primarily focuses on environmental impacts",
+"Social impacts are often qualitative and difficult to quantify",
+"Current LCA methodologies lack standardized methods for social assessment",
+"All of the above"
+],
+a:"All of the above"
+},
+{
+q:"If a process emits 10 kg CO2 and 2 kg of methane with a GWP of 25, then what is the total emission from this process?",
+o:["10 kg CO2 eq","25 kg CO2 eq","50 kg CO2 eq","60 kg CO2 eq"],
+a:"60 kg CO2 eq"
+},
+{
+q:"In a LCA study producing electricity from a solar panel causes 0.1 kg CO2 eq/unit of emissions and a total emissions of 200 kg CO2 eq. What will be the total emissions if the same amount of electricity is generated from a coal based grid with an emissions value of 2 kg CO2 eq/unit of electricity?",
+o:["200 kg CO2 eq","1000 kg CO2 eq","2000 kg CO2 eq","4000 kg CO2 eq"],
+a:"4000 kg CO2 eq"
+},
+{
+q:"What is the primary purpose of defining the goal and scope in Life Cycle Assessment (LCA)?",
+o:[
+"To build a data inventory",
+"To establish the boundaries and objectives of the study",
+"To determine the financial costs associated with a life cycle",
+"To analyze the social implications of a product's life cycle"
+],
+a:"To establish the boundaries and objectives of the study"
+}
+];
+
+// Limit to 64 questions maximum
+let questions = shuffle([...quizData]);
+if (questions.length > 64) {
+    questions = questions.slice(0, 64);
+}
+
+const form = document.getElementById("quizForm");
+
+questions.forEach((q, i) => {
+    let div = document.createElement("div");
+    div.className = "question";
+
+    let opts = shuffle([...q.o]);
+
+    div.innerHTML = `<p><b>${i + 1}) ${q.q}</b></p>`;
+    opts.forEach(o => {
+        div.innerHTML += `<label><input type="radio" name="q${i}" value="${o}"> ${o}</label>`;
+    });
+    div.innerHTML += `<p id="r${i}"></p>`;
+
+    form.appendChild(div);
+});
+
+function submitQuiz() {
+    let score = 0;
+
+    questions.forEach((q, i) => {
+        let sel = document.querySelector(`input[name=q${i}]:checked`);
+        let res = document.getElementById(`r${i}`);
+
+        if (sel) {
+            if (sel.value === q.a) {
+                score++;
+                res.innerHTML = "✅ Correct";
+                res.className = "correct";
+            } else {
+                res.innerHTML = "❌ Wrong | Correct: " + q.a;
+                res.className = "wrong";
+            }
+        } else {
+            res.innerHTML = "❌ Not Answered | Correct: " + q.a;
+            res.className = "wrong";
+        }
+    });
+
+    document.getElementById("score").innerText = `Final Score: ${score} / ${questions.length}`;
+    window.scrollTo(0, document.body.scrollHeight);
+}
+</script>
+</body>
+</html>

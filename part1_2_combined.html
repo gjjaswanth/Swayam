@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Combined Exam (Part 1 & 2)</title>
+<style>
+body { font-family: 'Inter', Arial, sans-serif; background:#f4f6f8; padding:20px; }
+h1 { text-align:center; }
+.question { background:white; padding:15px; margin-bottom:15px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.correct { color:green; font-weight:bold; }
+.wrong { color:red; font-weight:bold; }
+button { padding:12px 25px; font-size:16px; background:#222; color:white; border:none; border-radius:6px; cursor:pointer; transition: background 0.2s; }
+button:hover { background: #000; }
+label { display: block; margin-top: 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>Combined Exam (Part 1 & 2)</h1>
+<form id="quizForm"></form>
+<button onclick="submitQuiz()">Submit</button>
+<h2 id="score"></h2>
+
+<script>
+function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+
+const quizData = [
+/* WEEK 1 */
+{
+q:"What is the primary disadvantage of solar and wind energy compared to fossil fuels?",
+o:["They are always more expensive","Intermittency (they are not available 24/7)","They require water for cooling","They produce radioactive waste"],
+a:"Intermittency (they are not available 24/7)"
+},
+{
+q:"What is the main characteristic that defines a \"renewable\" energy resource?",
+o:["It requires no infrastructure investment for deployment","It is replenished naturally on a human timescale","It is more cost-effective than fossil fuel alternatives","It has higher energy density than conventional fossil fuels"],
+a:"It is replenished naturally on a human timescale"
+},
+{
+q:"What is the observed trend regarding energy consumption in OECD (developed) countries in recent years?",
+o:["Rapid exponential growth","Stagnant or slightly declining due to efficiency and population stability","Sharp decline due to lack of resources","Fluctuating wildly"],
+a:"Stagnant or slightly declining due to efficiency and population stability"
+},
+{
+q:"Which country has the highest per capita energy consumption?",
+o:["Qatar","United States","China","India"],
+a:"Qatar"
+},
+{
+q:"Which country has the highest total energy consumption?",
+o:["India","China","United States","Brazil"],
+a:"China"
+},
+{
+q:"What is \"Energy Poverty\"?",
+o:["Lack of access to modern energy services like electricity and clean cooking facilities","When a country runs out of coal","When energy prices are too low","The use of too much renewable energy"],
+a:"Lack of access to modern energy services like electricity and clean cooking facilities"
+},
+{
+q:"In the context of energy consumption, what major factor drives the increase in energy use in developing nations like India?",
+o:["Decrease in manufacturing","Rise in standard of living and population growth","Saturation of infrastructure","Adoption of electric vehicles only"],
+a:"Rise in standard of living and population growth"
+},
+{
+q:"Which sector typically consumes the largest share of global delivered energy?",
+o:["Residential","Agriculture","Industrial","IT sector"],
+a:"Industrial"
+},
+
+/* WEEK 2 */
+{
+q:"What is \"Primary Energy\"?",
+o:["Energy that has been converted into electricity","Energy available directly in the raw form (e.g., coal, crude oil, solar) before conversion","Energy used specifically for residential lighting","The energy remaining after transmission losses"],
+a:"Energy available directly in the raw form (e.g., coal, crude oil, solar) before conversion"
+},
+{
+q:"A country's total final energy consumption is 5000 PJ. If the industrial sector uses 40% of this, how much energy does industry consume?",
+o:["1000 PJ","1500 PJ","2000 PJ","2500 PJ"],
+a:"2000 PJ"
+},
+{
+q:"A country has coal reserves of 40,000 million tonnes. Its current annual coal production is 500 million tonnes per year. What is the static R/P ratio?",
+o:["10 Years","20 Years","40 Years","80 Years"],
+a:"80 Years"
+},
+{
+q:"Which of the following is not a primary fossil fuel resource?",
+o:["Coal","Crude oil","Natural gas","Electricity"],
+a:"Electricity"
+},
+{
+q:"What is the main reason for the significant difference between \"Primary Energy\" supply and \"Final Energy\" consumption?",
+o:["Theft of electricity","Conversion losses (thermodynamics) and transmission losses","Statistical errors","Storage of energy in batteries"],
+a:"Conversion losses (thermodynamics) and transmission losses"
+},
+{
+q:"Which unit is commonly used to compare the energy content of different fossil fuels on a large scale?",
+o:["Volt","Ampere","Tonne of Oil Equivalent (toe)","Pascal"],
+a:"Tonne of Oil Equivalent (toe)"
+},
+{
+q:"The term \"proved reserves\" refers to:",
+o:["Estimated resources that may exist","Technically recoverable resources with current technology","Resources guaranteed by government","All fossil fuels discovered in the past century"],
+a:"Technically recoverable resources with current technology"
+},
+{
+q:"Which major fossil fuel is primarily composed of Methane (CH4)?",
+o:["Coal","Natural Gas","Gasoline","Diesel"],
+a:"Natural Gas"
+},
+
+/* WEEK 3 */
+{
+q:"What is the fundamental principle of the \"Time Value of Money\"?",
+o:["Money has the same value always","Money today is worth more than the same money in the future","Time does not change the value of money","Interest rates do not affect the value of money"],
+a:"Money today is worth more than the same money in the future"
+},
+{
+q:"What typically happens to the NPV of a project if you increase the Discount Rate used in the calculation?",
+o:["The NPV increases","The NPV decreases","The NPV stays exactly the same","The NPV becomes infinite"],
+a:"The NPV decreases"
+},
+{
+q:"If the NPV of a project is positive, what does it indicate?",
+o:["The project is expected to be profitable and should typically be accepted","The project will lose money","The project has zero risk","The project should be abandoned immediately"],
+a:"The project is expected to be profitable and should typically be accepted"
+},
+{
+q:"What does the Internal Rate of Return (IRR) represent?",
+o:["The annual profit generated by the project in dollars","The discount rate that makes the Net Present Value (NPV) of a project equal to zero","The depreciation rate of the solar panels","The tax rate applied to the project"],
+a:"The discount rate that makes the Net Present Value (NPV) of a project equal to zero"
+},
+{
+q:"Why do governments often offer \"Tax Credits\" for renewable energy projects?",
+o:["To increase the cost of electricity for consumers","To encourage investment by improving the project's financial return","To reduce the efficiency of the technology","To increase the taxes paid by the company"],
+a:"To encourage investment by improving the project's financial return"
+},
+{
+q:"Which of the following is considered a Capital Expenditure (CAPEX)?",
+o:["Monthly salary of plant operators","Annual insurance premiums","Purchase cost of machinery, equipment, and installation","Routine lubricating oil for gears"],
+a:"Purchase cost of machinery, equipment, and installation"
+},
+{
+q:"A project needs an initial investment of ₹50,000 and returns ₹10,000 per year. What is the Simple Payback Period?",
+o:["2 Years","3 Years","5 Years","10 Years"],
+a:"5 Years"
+},
+{
+q:"If the discount rate is 10%, what is the present value of ₹1,000 received after 1 year?",
+o:["₹1,100","₹909.09","₹1,000","₹850"],
+a:"₹909.09"
+},
+
+/* WEEK 4 */
+{
+q:"In project financing, what is the key difference between \"Debt\" and \"Equity\"?",
+o:["Debt represents ownership in the company, while Equity is a loan.","Debt must be repaid with interest, while Equity represents ownership and claims on residual profits.","Debt provides voting rights in the company, while Equity does not.","Equity has a fixed repayment schedule, while Debt returns vary with company performance."],
+a:"Debt must be repaid with interest, while Equity represents ownership and claims on residual profits."
+},
+{
+q:"What is \"Externality\" in environmental economics?",
+o:["A cost or benefit caused by a producer that is not financially incurred or received by that producer.","The external value of a power plant.","The cost of importing fuel from an external country.","The total profit made by a company."],
+a:"A cost or benefit caused by a producer that is not financially incurred or received by that producer."
+},
+{
+q:"What does ESG stand for in the context of corporate reporting?",
+o:["Energy, Science, Growth","Environmental, Social, and Governance","Economics, Strategy, Goals","Electricity, Solar, Gas"],
+a:"Environmental, Social, and Governance"
+},
+{
+q:"An investor is comparing three mutually exclusive energy projects proposed by three different companies. The Net Present Value (NPV) for each is calculated as follows: Company X: NPV = + $50,000; Company Y: NPV = - $20,000 (Negative); Company Z: NPV = + $85,000. Which company's project should the investor choose based on economic decision-making principles?",
+o:[
+"Company X, because positive NPV is sufficient.",
+"Company Y, because it has the lowest value.",
+"Company Z, because it has the highest positive NPV.",
+"Any company, as long as the project is renewable."
+],
+a:"Company Z, because it has the highest positive NPV."
+},
+{
+q:"A government imposes a Carbon Tax of $30 per tonne of CO2. If a power plant emits 10,000 tonnes of CO2 in a year, how much tax must they pay?",
+o:["$3,000","$30,000","$300,000","$3,000,000"],
+a:"$300,000"
+},
+{
+q:"Which business strategy reduces both cost and environmental impact?",
+o:["Ignoring regulations","Energy efficiency improvements","Using only diesel generators","Increasing emissions"],
+a:"Energy efficiency improvements"
+},
+{
+q:"In a Project Financing structure, a company uses a Debt-to-Equity ratio of 70:30. If the total project cost is $100,000, how much \"Equity\" must the company invest?",
+o:["$30,000","$70,000","$100,000","$50,000"],
+a:"$30,000"
+},
+{
+q:"You are evaluating two energy efficiency upgrades for a factory. Project X has a Benefit-Cost Ratio (BCR) of 0.8, and Project Y has a BCR of 1.2. Based on this information, what is the correct decision?",
+o:[
+"Accept Project X only.",
+"Accept Project Y only.",
+"Accept both projects.",
+"Reject both projects."
+],
+a:"Accept Project Y only."
+},
+/* ================= WEEK 5 ================= */
+{
+q:"What is the impact of \"pre-ignition\" on motive power and pistons in a combustion engine?",
+o:["Boosts the motive power and wears down the piston","Boosts the motive power and increases piston life","Causes loss of motive power and increases piston life","Causes loss of motive power and wears down the piston"],
+a:"Causes loss of motive power and wears down the piston"
+},
+{
+q:"Sulfur dioxide (SO2) is a primary source of acid rain, forming sulfurous acid (H2SO3) on reaction with water. How many kilograms of slaked lime (Ca(OH)2) are required as a solution for mitigation to the problem of acid rain per kilogram of SO2 formed during the burning of anthracite in a thermal power plant? Molar mass data (g/mol): S: 32 O: 16 H: 1 Ca: 40",
+o:["1.156","2.156","3.156","4.156"],
+a:"1.156"
+},
+{
+q:"Which of the following compounds was used as an antiknock agent in gasoline?",
+o:["Methanol (CH3OH)","Tetraethyl lead (Pb(C2H5)4)","Ethanol (C2H5OH)","Methyl tertiary-butyl ether (MTBE)"],
+a:"Tetraethyl lead (Pb(C2H5)4)"
+},
+{
+q:"Which atmospheric layer generally has the highest ozone concentrations?",
+o:["Mesosphere","Stratosphere","Troposphere","Earth's surface"],
+a:"Stratosphere"
+},
+{
+q:"Which international agreement aimed to reduce the production of CFCs to protect the ozone layer?",
+o:["Kyoto Protocol","Montreal Protocol","Vienna Convention","Paris Agreement"],
+a:"Montreal Protocol"
+},
+{
+q:"Which of the following gases is NOT a greenhouse gas?",
+o:["Carbon dioxide (CO2)","Methane (CH4)","Nitrogen (N2)","Nitrous oxide (N2O)"],
+a:"Nitrogen (N2)"
+},
+{
+q:"It is estimated that under standard conditions (1 atm pressure and 298K temperature), the volume of total air in the atmosphere is 6 × 10^18 m^3. The CO2 concentrations in the atmosphere went from 262.16 ppm (parts per million) in 1800 to 410 ppm in 2025 by volume. How many kilograms of extra CO2 were added to the atmosphere from 1800 to 2025 if at STP, 1 kilomole of the gas corresponds to a volume of 22.4 m^3 of the gas? Assume the molar mass of CO2 as 44 g/mol.",
+o:["1.742×10^15","1.742×10^14","17.42×10^15","1742×10^15"],
+a:"1.742×10^15"
+},
+{
+q:"Which of the following is TRUE about weather and climate?",
+o:["Weather results from temporary thermal interactions, and climate is the long-term result of the weather.","Climate results from temporary thermal interactions, and the weather is the long-term result of the climate.","Climate and weather are the same and can be used interchangeably.","None of the above."],
+a:"Weather results from temporary thermal interactions, and climate is the long-term result of the weather."
+},
+
+/* ================= WEEK 6 ================= */
+{
+q:"What is the purpose of the Kigali Agreement?",
+o:["Increase CO2 emissions","Substitute HFCs with less harmful refrigerants (HFOs)","Promote fossil fuel power plants","Support gasoline economy"],
+a:"Substitute HFCs with less harmful refrigerants (HFOs)"
+},
+{
+q:"Which of the following statements is TRUE?",
+o:["The current market price of fossil electricity is much higher than renewable electricity","Heavy snowfall in the hilly regions clearly shows that global warming is a myth","Extreme weather phenomena like heavy snowfall, extreme winters, typhoons, etc., can result from global warming","We need to eliminate CO2 from our atmosphere completely"],
+a:"Extreme weather phenomena like heavy snowfall, extreme winters, typhoons, etc., can result from global warming"
+},
+{
+q:"Consider the following two statements: Statement 1: Coal mining can cause wildlife disturbance as it causes partial deforestation during site preparation. Statement 2: Temperature increase in water bodies (due to immense heat rejections) has adverse impacts on the aquatic environments and ecology.",
+o:["Statement 1 is correct, and Statement 2 is incorrect.","Statement 2 is correct, and Statement 1 is incorrect.","Both statements 1 and 2 are correct.","Both statements 1 and 2 are incorrect."],
+a:"Both statements 1 and 2 are correct."
+},
+{
+q:"Which of the following is TRUE regarding nuclear waste?",
+o:["Nuclear waste is not radioactive","Accidental release of radioactive materials can make the entire region completely uninhabitable","Nuclear waste disposal is simple and poses no problems to the region","Releasing the nuclear waste into the water bodies is a sustainable waste disposal solution"],
+a:"Accidental release of radioactive materials can make the entire region completely uninhabitable"
+},
+{
+q:"What direct environmental issue occurs when warm water from power plants is discharged into rivers or lakes?",
+o:["Global warming","Acid rain","Thermal pollution","Water scarcity"],
+a:"Thermal pollution"
+},
+{
+q:"What is a primary environmental concern associated with hydraulic fracturing (fracking)?",
+o:["Release of oxygen into the air","Increase in agricultural activity","Increase in groundwater purity","Contamination of local water wells"],
+a:"Contamination of local water wells"
+},
+{
+q:"Which of the following is/are the environmental concerns associated with strip mining?",
+o:["Water runoff pollution","Disturbance to the environment and ecosystem","Release of fine particulates in the atmosphere","All of the above"],
+a:"All of the above"
+},
+{
+q:"Consider the following two statements regarding renewable energy: Statement 1: Solar energy is an entirely free-to-use source of renewable energy since the Sun is a free source of energy. Statement 2: Bioethanol production is costly, inefficient, and requires significant water use.",
+o:["Statement 1 is correct, and Statement 2 is incorrect.","Statement 2 is correct, and Statement 1 is incorrect.","Both statements 1 and 2 are correct.","Both statements 1 and 2 are incorrect."],
+a:"Statement 2 is correct, and Statement 1 is incorrect."
+},
+
+/* ================= WEEK 7 ================= */
+{
+q:"Which of the following statements defines the term \"sustainability\" the best?",
+o:["To meet the needs of the present by every possible means","To meet the needs of the future by every possible means","To meet the needs of the present without compromising the needs of the future","To reduce the environmental burdens, no matter the costs"],
+a:"To meet the needs of the present without compromising the needs of the future"
+},
+{
+q:"Consider the following two statements regarding sustainability: Statement 1: The problem of sustainability is complex in nature, as it balances several sectors at the same time. Statement 2: Approaches to sustainable engineering involve rigid management and should never emulate natural processes",
+o:["Statement 1 is correct, and Statement 2 is incorrect","Statement 2 is correct, and Statement 1 is incorrect","Both statements 1 and 2 are correct","Both statements 1 and 2 are incorrect"],
+a:"Statement 1 is correct, and Statement 2 is incorrect"
+},
+{
+q:"Consider the following two statements on life cycle assessment (LCA): Statement 1: The results from an LCA study give us the exact amount of impact a particular process will have on the environment Statement 2: An LCA is a tool to inform decision-makers about the environmental performance of a product",
+o:["Statement 1 is correct, and Statement 2 is incorrect","Statement 2 is correct, and Statement 1 is incorrect","Both statements 1 and 2 are correct","Both statements 1 and 2 are incorrect"],
+a:"Statement 2 is correct, and Statement 1 is incorrect"
+},
+{
+q:"Which of the following could be a good functional unit of a life cycle assessment (LCA) study on the production of biofuels?",
+o:["Kilojoules","Litres","Kilograms","1 litre of biofuel produced daily"],
+a:"1 litre of biofuel produced daily"
+},
+{
+q:"What is the purpose of the goal and scope phase in a Life Cycle Assessment (LCA)?",
+o:["To directly construct an inventory","To directly provide quantifiable potential impact scores","To provide the intended use of the study and background information","To eliminate environmental impacts"],
+a:"To provide the intended use of the study and background information"
+},
+{
+  "q": "Which of the following statements is/are accurate about the limitations of Life Cycle Assessment (LCA)?",
+  "o": [
+    "LCI (Life Cycle Inventory) data collected contains uncertainty",
+    "Not a complete assessment of all environmental issues because only those identified in the goal and scope are considered",
+    "Sensitivity and other uncertainty analyses are not fully developed",
+    "All of the above"
+  ],
+  "a": "All of the above"
+},
+{
+q:"In a unit process X of an LCA study, two products, A (3.5 kg) and B (6.5 kg), are produced. The total economic value of product A is $650, and B is $350. If the total environmental impact score of process X is 100 units, then consider the following statements: Statement 1: Based on mass allocation, the impacts allocated to product A are 65 units, and product B is 35 units. Statement 2: Based on economic allocation, the impacts allocated to product A are 35 units, and product B is 65 units.",
+o:["Statement 1 is correct, and Statement 2 is incorrect","Statement 2 is correct, and Statement 1 is incorrect","Both statements 1 and 2 are correct","Both statements 1 and 2 are incorrect"],
+a:"Both statements 1 and 2 are incorrect"
+},
+{
+  "q": "Which of the following is a true statement regarding the system boundary in life cycle assessment?",
+  "o": [
+    "Cradle-to-gate system boundary contains the end-of-life phase, whereas the cradle-to-grave system boundary does not",
+    "Cradle-to-grave system boundary contains the end-of-life phase, whereas cradle-to-gate system boundary does not",
+    "Both cradle-to-gate and cradle-to-grave system boundaries contain end-of-life phase",
+    "Neither of the system boundaries (cradle-to-gate and cradle-to-grave) contains the end-of-life phase"
+  ],
+  "a": "Cradle-to-grave system boundary contains the end-of-life phase, whereas cradle-to-gate system boundary does not"
+},
+
+/* ================= WEEK 8 ================= */
+{
+q:"Which of the following is considered \"Secondary Data\" in an LCA?",
+o:["Data directly measured from a manufacturing process","Data obtained from journal articles and reports","Both (A) and (B)","None of the above"],
+a:"Data obtained from journal articles and reports"
+},
+{
+q:"Which of the following impact categories relates to the algal blooms in the water bodies?",
+o:["Global Warming Potential (GWP)","Smog Creation Potential (SCP)","Acidification Potential (AP)","Eutrophication Potential (EP)"],
+a:"Eutrophication Potential (EP)"
+},
+{
+q:"Which impact category is associated with the potential for chemicals to cause harm to terrestrial ecosystems, such as soil and land-based organisms?",
+o:["Acidification Potential (AP)","Terrestrial Ecotoxicity Potential (TEP)","Smog Creation Potential (SCP)","Global Warming Potential (GWP)"],
+a:"Terrestrial Ecotoxicity Potential (TEP)"
+},
+{
+q:"What is the most common unit used to report Acidification Potential (AP) in LCA?",
+o:["kg CFC11-equivalent","kg CO2-equivalent","kg SO2-equivalent","kg O3-equivalent"],
+a:"kg SO2-equivalent"
+},
+{
+q:"What is the primary cause of Eutrophication Potential (EP) in aquatic systems?",
+o:["Emissions of carbon dioxide (CO2)","Ground-level ozone formation","Particulate matter from combustion processes","Nutrient overloads from nitrogen and phosphorus"],
+a:"Nutrient overloads from nitrogen and phosphorus"
+},
+{
+q:"If a process emits 100 kg of CO2 and 2 kg of methane (with a GWP of 25), and 1 kg of N2O (with a GWP of 298), what is the total emission from this process?",
+o:["400 kg CO2 equivalent","448 kg CO2 equivalent","324 kg CO2 equivalent","103 kg CO2 equivalent"],
+a:"448 kg CO2 equivalent"
+},
+{
+q:"In an LCA study, company X produces 1000 units of a product with 2000 kg CO2 eq emissions, and company Y produces 5 units of the same product with 30 kg CO2 eq emissions. If the functional unit of this LCA study is 1 unit of the product, which company is more environmentally sustainable?",
+o:["Company X","Company Y","Both are equally sustainable","Not enough data to comment"],
+a:"Company X"
+},
+{
+q:"If the production of 40 units of a certain commodity has a total environmental impact score of 1000, what is the environmental impact score for a single commodity?",
+o:["1000","40000","40","25"],
+a:"25"
+}
+];
+
+// Limit to 64 questions maximum
+let questions = shuffle([...quizData]);
+if (questions.length > 64) {
+    questions = questions.slice(0, 64);
+}
+
+const form = document.getElementById("quizForm");
+
+questions.forEach((q, i) => {
+    let div = document.createElement("div");
+    div.className = "question";
+
+    let opts = shuffle([...q.o]);
+
+    div.innerHTML = `<p><b>${i + 1}) ${q.q}</b></p>`;
+    opts.forEach(o => {
+        div.innerHTML += `<label><input type="radio" name="q${i}" value="${o}"> ${o}</label>`;
+    });
+    div.innerHTML += `<p id="r${i}"></p>`;
+
+    form.appendChild(div);
+});
+
+function submitQuiz() {
+    let score = 0;
+
+    questions.forEach((q, i) => {
+        let sel = document.querySelector(`input[name=q${i}]:checked`);
+        let res = document.getElementById(`r${i}`);
+
+        if (sel) {
+            if (sel.value === q.a) {
+                score++;
+                res.innerHTML = "✅ Correct";
+                res.className = "correct";
+            } else {
+                res.innerHTML = "❌ Wrong | Correct: " + q.a;
+                res.className = "wrong";
+            }
+        } else {
+            res.innerHTML = "❌ Not Answered | Correct: " + q.a;
+            res.className = "wrong";
+        }
+    });
+
+    document.getElementById("score").innerText = `Final Score: ${score} / ${questions.length}`;
+    window.scrollTo(0, document.body.scrollHeight);
+}
+</script>
+</body>
+</html>
